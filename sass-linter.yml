@@ -1,0 +1,10 @@
+files:
+  include: 'assets/styles/*.scss'
+options:
+  formatter: stylish
+rules:
+  indentation:
+    - 2
+    - size: 4
+  empty-line-between-blocks:
+    - 2

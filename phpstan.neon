@@ -1,0 +1,15 @@
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+parameters:
+    excludePaths:
+        - src/DataFixtures
+        - src/Security
+    ignoreErrors:
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::findOneBy[A-Z][a-zA-Z]*\(\)#'
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::findBy[A-Z][a-zA-Z]*\(\)#'
+        - '#is never written, only read#'
+    reportUnmatchedIgnoredErrors: false
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
