@@ -12,12 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
 
-    
+
     /**
      * @Route("/", name="index")
      */
     public function index(): array
     {
-        return
+        return [];
     }
 }
