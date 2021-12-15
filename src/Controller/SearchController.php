@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/search", name="search_")
  */
-class HomeController extends AbstractController
+class SearchController extends AbstractController
 {
 
 
