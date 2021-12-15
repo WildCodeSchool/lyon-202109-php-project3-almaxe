@@ -40,7 +40,7 @@ class Partner
     private string $picture;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="partner", nullable=true)
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="partner")
      */
     private Collection $products;
 
