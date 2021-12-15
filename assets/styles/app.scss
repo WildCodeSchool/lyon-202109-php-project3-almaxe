@@ -1,7 +1,7 @@
-@import 'variables.scss';
+@import 'variables';
 
 body {
-    margin:0;
     background-color: $wild-color;
     color: $light;
+    margin: 0;
 }
