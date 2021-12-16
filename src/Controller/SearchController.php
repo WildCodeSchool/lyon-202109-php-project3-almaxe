@@ -2,22 +2,26 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ProductRepository;
+use App\Service\ObjectSerializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/search", name="search_")
  */
 class SearchController extends AbstractController
 {
-
-
     /**
-     * @Route("/", name="index")
+     * @Route("/dimensions/{height}/{width}/{depth}", name="dimensions", defaults={"_format"="json"})
      */
-    public function index(): array
+    public function searchHeight(int $height, int $width, int $depth, ProductRepository $productRepository): Response
     {
-        return [];
+        $products = $productRepository->findAllLesserThanDimensions($height, $width, $depth);
+
+        return $this->render('search/search.json.twig', [
+            'products' => $products,
+        ]);
     }
 }

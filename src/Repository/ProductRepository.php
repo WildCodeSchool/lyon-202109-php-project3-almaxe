@@ -19,32 +19,44 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllLesserThanDimensions(int $height, int $width, int $depth)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('p');
 
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if ($height) {
+            $qb->where('p.height < :height')
+                ->setParameter('height', $height);
+        }
+
+        if ($width) {
+            if ($height) {
+                $qb->andWhere('p.width < :width');
+            } else {
+                $qb->where('p.width < :width');
+            }
+
+            $qb->setParameter('width', $width);
+        }
+
+        if ($depth) {
+            if ($height || $width) {
+                $qb->andWhere('p.depth < :depth');
+            } else {
+                $qb->where('p.depth < :depth');
+            }
+            $qb->setParameter('depth', $depth);
+        }
+
+        if ($height) {
+            $qb->orderBy('p.height', 'DESC');
+        } elseif ($width) {
+            $qb->orderBy('p.width', 'DESC');
+        } elseif ($depth) {
+            $qb->orderBy('p.depth', 'DESC');
+        }
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
     }
-    */
 }
