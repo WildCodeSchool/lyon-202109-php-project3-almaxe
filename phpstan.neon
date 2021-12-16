@@ -6,7 +6,6 @@ parameters:
     excludePaths:
         - src/DataFixtures
         - src/Security
-        - node_modules
     ignoreErrors:
         - '#Call to an undefined method [a-zA-Z0-9\\_]+::findOneBy[A-Z][a-zA-Z]*\(\)#'
         - '#Call to an undefined method [a-zA-Z0-9\\_]+::findBy[A-Z][a-zA-Z]*\(\)#'
