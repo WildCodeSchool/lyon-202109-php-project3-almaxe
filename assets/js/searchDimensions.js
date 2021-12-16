@@ -4,7 +4,7 @@ const resultList = document.getElementById('resultList');
 searchButton.addEventListener('click', () => {
     const height = document.getElementById('height').value || 0;
     const width = document.getElementById('width').value || 0;
-    const depth = document.getElementById('width').value || 0;
+    const depth = document.getElementById('depth').value || 0;
 
     fetch(`search/dimensions/${height}/${width}/${depth}`)
         .then((response) => response.json())

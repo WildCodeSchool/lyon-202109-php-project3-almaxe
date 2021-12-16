@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Product;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,11 +19,7 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    /**
-     * @return Product[] Returns an array of Product objects
-     */
-
-    public function findAllLesserThanDimensions(int $height, int $width, int $depth)
+    public function findAllLesserThanDimensions(int $height, int $width, int $depth): array
     {
         $qb = $this->createQueryBuilder('p');
 
@@ -53,6 +49,6 @@ class ProductRepository extends ServiceEntityRepository
 
         $query = $qb->getQuery();
 
-        return $query->execute();
+        return (array) $query->execute();
     }
 }
