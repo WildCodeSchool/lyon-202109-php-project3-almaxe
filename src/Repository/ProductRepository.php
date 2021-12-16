@@ -24,15 +24,15 @@ class ProductRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p');
 
         if ($height) {
-            $qb->where('p.height < :height')
+            $qb->where('p.height <= :height')
                 ->setParameter('height', $height);
         }
 
         if ($width) {
             if ($height) {
-                $qb->andWhere('p.width < :width');
+                $qb->andWhere('p.width <= :width');
             } else {
-                $qb->where('p.width < :width');
+                $qb->where('p.width <= :width');
             }
 
             $qb->setParameter('width', $width);
@@ -40,9 +40,9 @@ class ProductRepository extends ServiceEntityRepository
 
         if ($depth) {
             if ($height || $width) {
-                $qb->andWhere('p.depth < :depth');
+                $qb->andWhere('p.depth <= :depth');
             } else {
-                $qb->where('p.depth < :depth');
+                $qb->where('p.depth <= :depth');
             }
             $qb->setParameter('depth', $depth);
         }

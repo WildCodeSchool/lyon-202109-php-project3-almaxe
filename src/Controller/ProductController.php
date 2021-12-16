@@ -60,8 +60,8 @@ class ProductController extends AbstractController
         $form->setData($data);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
             if (!is_array($data)) {
                 throw new Exception('Failed to parse data');
             }
