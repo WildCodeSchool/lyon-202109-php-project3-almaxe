@@ -1,7 +1,5 @@
 @import 'variables';
 
-body {
-    background-color: $light;
-    color: $secondary-color;
-    margin: 0;
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
