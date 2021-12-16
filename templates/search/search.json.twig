@@ -1,8 +1,8 @@
 {
 {% for product in products %}
-	"{{loop.index}}":{{ 
-    {
-        'id': product.id, 
+	"{{ loop.index }}":
+	{{ {
+        'id': product.id,
         'name': product.name,
         'price': product.price,
         'priceCurrency': product.priceCurrency,
@@ -16,8 +16,7 @@
         'partnerName': product.partner.name,
         'partnerAffiliateKey': product.partner.affiliateKey,
         'partnerPicture': product.partner.picture,
-    }|json_encode(465)|raw
-    }}
+    }|json_encode(465)|raw }}
 	{% if loop.index < loop.length %},
 	{% endif %}
 {% endfor %}

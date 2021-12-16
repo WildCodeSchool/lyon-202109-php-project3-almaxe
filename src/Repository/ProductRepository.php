@@ -19,6 +19,10 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+
     public function findAllLesserThanDimensions(int $height, int $width, int $depth)
     {
         $qb = $this->createQueryBuilder('p');
@@ -45,14 +49,6 @@ class ProductRepository extends ServiceEntityRepository
                 $qb->where('p.depth < :depth');
             }
             $qb->setParameter('depth', $depth);
-        }
-
-        if ($height) {
-            $qb->orderBy('p.height', 'DESC');
-        } elseif ($width) {
-            $qb->orderBy('p.width', 'DESC');
-        } elseif ($depth) {
-            $qb->orderBy('p.depth', 'DESC');
         }
 
         $query = $qb->getQuery();
