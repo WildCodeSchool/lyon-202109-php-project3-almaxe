@@ -16,9 +16,9 @@ class SearchController extends AbstractController
     /**
      * @Route("/dimensions/{height}/{width}/{depth}", name="dimensions", defaults={"_format"="json"})
      */
-    public function searchHeight(int $height, int $width, int $depth, ProductRepository $productRepository): Response
+    public function searchDimensions(int $height, int $width, int $depth, ProductRepository $repository): Response
     {
-        $products = $productRepository->findAllLesserThanDimensions($height, $width, $depth);
+        $products = $repository->findAllLesserThanDimensions($height, $width, $depth);
 
         return $this->render('search/search.json.twig', [
             'products' => $products,

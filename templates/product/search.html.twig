@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product search
+{% endblock %}
+
+{% block body %}
+	{{ include('product/_form_search.html.twig') }}
+
+	{% if products is defined %}
+		<pre>
+        {{ dump(products) }}
+    </pre>
+
+	{% endif %}
+{% endblock %}

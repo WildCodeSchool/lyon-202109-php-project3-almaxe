@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Form\SearchDimensionsType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,6 +47,38 @@ class ProductController extends AbstractController
         return $this->renderForm('product/new.html.twig', [
             'product' => $product,
             'form' => $form,
+        ]);
+    }
+
+    /**
+     * @Route("/search", name="search")
+     */
+    public function searchDimensions(Request $request, ProductRepository $productRepository): Response
+    {
+        $form = $this->createForm(SearchDimensionsType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            if (!is_array($data)) {
+                throw new Exception('Failed to parse body');
+            }
+
+            $width = intval($data['width']);
+            $height = intval($data['height']);
+            $depth = intval($data['depth']);
+
+            $products = $productRepository->findAllLesserThanDimensions($height, $width, $depth);
+
+            return $this->render('product/search.html.twig', [
+                'products' => $products,
+                'form' => $form->createView(),
+            ]);
+        }
+
+        return $this->render('product/search.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
