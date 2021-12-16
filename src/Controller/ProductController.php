@@ -56,11 +56,12 @@ class ProductController extends AbstractController
     public function searchDimensions(Request $request, ProductRepository $productRepository): Response
     {
         $form = $this->createForm(SearchDimensionsType::class);
+        $data = $form->getData();
+        $form->setData($data);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
 
+        if ($form->isSubmitted() && $form->isValid()) {
             if (!is_array($data)) {
                 throw new Exception('Failed to parse data');
             }
