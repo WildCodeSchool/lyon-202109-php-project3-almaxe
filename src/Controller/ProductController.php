@@ -62,7 +62,7 @@ class ProductController extends AbstractController
             $data = $form->getData();
 
             if (!is_array($data)) {
-                throw new Exception('Failed to parse body');
+                throw new Exception('Failed to parse data');
             }
 
             $width = intval($data['width']);
