@@ -7,9 +7,9 @@
 	{{ include('product/_form_search.html.twig') }}
 
 	{% if products is defined %}
-		<pre>
-        {{ dump(products) }}
-    </pre>
+		{% for product in products %}
+			<li>{{product.name}}</li>
+		{% endfor %}
 
 	{% endif %}
 {% endblock %}
