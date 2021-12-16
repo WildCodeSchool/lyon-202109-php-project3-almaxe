@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Product;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +19,36 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllLesserThanDimensions(int $height, int $width, int $depth): array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('p');
 
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if ($height) {
+            $qb->where('p.height <= :height')
+                ->setParameter('height', $height);
+        }
+
+        if ($width) {
+            if ($height) {
+                $qb->andWhere('p.width <= :width');
+            } else {
+                $qb->where('p.width <= :width');
+            }
+
+            $qb->setParameter('width', $width);
+        }
+
+        if ($depth) {
+            if ($height || $width) {
+                $qb->andWhere('p.depth <= :depth');
+            } else {
+                $qb->where('p.depth <= :depth');
+            }
+            $qb->setParameter('depth', $depth);
+        }
+
+        $query = $qb->getQuery();
+
+        return (array) $query->execute();
     }
-    */
 }

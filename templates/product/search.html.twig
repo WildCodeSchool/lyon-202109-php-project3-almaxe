@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product search
+{% endblock %}
+
+{% block body %}
+	{{ include('product/_form_search.html.twig') }}
+
+	{% if products is defined %}
+		<ul>
+			{% for product in products %}
+				<li class="block border-2">
+					<ul>
+						<li>Name:
+							{{ product.name }}</li>
+						<li>Width:
+							{{ product.width }}</li>
+						<li>Height:
+							{{ product.height }}</li>
+						<li>Depth:
+							{{ product.depth }}</li>
+					</ul>
+				</li>
+			{% endfor %}
+		</ul>
+
+
+	{% endif %}
+{% endblock %}
