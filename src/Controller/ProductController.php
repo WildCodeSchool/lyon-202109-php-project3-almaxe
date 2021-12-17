@@ -21,8 +21,25 @@ class ProductController extends AbstractController
      */
     public function index(ProductRepository $productRepository): Response
     {
+
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/search/{keyWords}", name="product_search", methods={"GET"})
+     */
+    public function search(ProductRepository $productRepository, string $keyWords = null): Response
+    {
+        if ($keyWords != null) {
+            $products = $productRepository->searchByKeyWords($keyWords);
+        } else {
+            $products = $productRepository->findAll();
+        }
+
+        return $this->render('product/index.html.twig', [
+            'products' => $products,
         ]);
     }
 

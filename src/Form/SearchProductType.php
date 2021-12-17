@@ -15,9 +15,6 @@ class SearchProductType extends AbstractType
         $builder
             ->add('keyWords', SearchType::class, [
                 'label' => false,
-            ])
-            ->add('Search', SubmitType::class, [
-                'label' => false,
             ]);
     }
 
