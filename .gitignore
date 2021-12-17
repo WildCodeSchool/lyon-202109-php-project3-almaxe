@@ -26,3 +26,8 @@ yarn-error.log
 /.phpcs-cache
 /phpcs.xml
 ###< squizlabs/php_codesniffer ###
+
+
+###>Other File###
+.DS_Store
+assets/.DS_Store
