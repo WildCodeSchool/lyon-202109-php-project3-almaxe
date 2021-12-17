@@ -5,7 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}"/>
 		<title>
-			{% block title %}Pile Poil{% endblock %}
+			{% block title %}Pile Poil
+			{% endblock %}
 		</title>
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
@@ -15,6 +16,11 @@
 		{% endblock %}
 	</head>
 	<body>
+		<header>
+			<div class="my-2">
+				<img src="{{ asset('build/images/logo.png') }}" alt="Logo de pile poil" class="w-20 h-20">
+			</div>
+		</header>
 		{% block body %}{% endblock %}
 	</body>
 </html>

@@ -2,32 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductType extends AbstractType
+class SearchDimensionsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('price')
-            ->add('priceCurrency')
-            ->add('height')
-            ->add('width')
-            ->add('depth')
-            ->add('picture')
-            ->add('url')
-            ->add('partnerProductId')
-            ->add('partner');
+            ->add('width', IntegerType::class, ['required' => false])
+            ->add('height', IntegerType::class, ['required' => false])
+            ->add('depth', IntegerType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Product::class,
+            // Configure your form options here
         ]);
     }
 }
