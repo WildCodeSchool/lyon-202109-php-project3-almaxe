@@ -29,5 +29,5 @@ yarn-error.log
 
 
 ###>Other File###
-/.DS_Store
-/assets/.DS_Store
+.DS_Store
+assets/.DS_Store
