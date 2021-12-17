@@ -1,7 +1,5 @@
-@import 'variables.scss';
+@import 'variables';
 
-body {
-    margin:0;
-    background-color: $wild-color;
-    color: $light;
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';

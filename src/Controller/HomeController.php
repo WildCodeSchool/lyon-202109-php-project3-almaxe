@@ -21,10 +21,22 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $keyWords = $search->get('keyWords')->getData();
-            $keyWords = strval($keyWords);
-            $keyWords = implode('%20', explode(' ', $keyWords));
+            if ($keyWords != null) {
+                $keyWords = strval($keyWords);
+                $keyWords = implode('%20', explode(' ', $keyWords));
+            } else {
+                $keyWords = "all";
+            }
+
+
+            $width = intval($search->get('width')->getData());
+            $height = intval($search->get('height')->getData());
+            $depth = intval($search->get('depth')->getData());
             // redirect to result page giving keyWord as GET paramaters
-            return $this->redirectToRoute('product_search', ['keyWords' => $keyWords]);
+            return $this->redirectToRoute(
+                'product_search',
+                ['keyWords' => $keyWords, 'width' => $width, 'height' => $height, 'depth' => $depth]
+            );
         }
 
         return $this->render('home/index.html.twig', [

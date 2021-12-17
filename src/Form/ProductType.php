@@ -21,8 +21,7 @@ class ProductType extends AbstractType
             ->add('picture')
             ->add('url')
             ->add('partnerProductId')
-            ->add('partner')
-        ;
+            ->add('partner');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

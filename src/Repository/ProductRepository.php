@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Product;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,47 +19,46 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    public function searchByKeyWords(string $words): array
+    public function searchProduct(array $parameters): array
     {
 
         $query = $this->createQueryBuilder('p');
-        if ($words != null) {
+
+
+
+        if ($parameters['height']) {
+            $height = $parameters['height'];
+            $query->andWhere('p.height <= :height')
+                ->setParameter('height', $height);
+        }
+
+        if ($parameters['width']) {
+            $width = $parameters['width'];
+            $query->andWhere('p.width <= :width')
+                ->setParameter('width', $width);
+        }
+
+        if ($parameters['depth']) {
+            $depth = $parameters['depth'];
+            $query->andWhere('p.depth <= :depth')
+                ->setParameter('depth', $depth);
+        }
+
+        if ($parameters['words'] != "all") {
+            $words = $parameters['words'];
             $words = explode('%20', $words);
+            $condition = "";
+            $first = true;
             foreach ($words as $word) {
-                $query->orWhere("p.name LIKE '%$word%'");
+                if ($first) {
+                    $condition .= "p.name LIKE '%$word%' ";
+                    $first = false;
+                }
+                $condition .= "OR p.name LIKE '%$word%' ";
             }
+            $query->andWhere($condition);
         }
 
         return (array) $query->getQuery()->getResult();
     }
-
-
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
