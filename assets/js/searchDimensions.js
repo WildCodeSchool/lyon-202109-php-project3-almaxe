@@ -13,7 +13,6 @@ searchButton.addEventListener('click', () => {
             Object.values(products).forEach((product) => {
                 const li = document.createElement('li');
                 li.innerHTML = product.name;
-
                 resultList.append(li);
             });
         });
