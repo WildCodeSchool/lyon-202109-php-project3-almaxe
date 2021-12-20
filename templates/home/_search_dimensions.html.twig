@@ -1,15 +1,29 @@
-<div>
-	<label for="height">Height</label>
-	<input type="text" id="height" name="height">
+<div class="justify-center flex flex-wrap mx-1">
+	<div class="flex relative items-center">
+		<label for="height" class="block text-sm font-medium text-gray-700 ">Hauteur</label>
+		<div class="mt-1 relative rounded-md shadow-sm ml-2">
+			<input type="text" name="height" id="height" class="focus:ring-indigo-500 focus:border-indigo-500 w-20 pr-12 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2 " placeholder="0">
+		</div>
+	</div>
 
-	<label for="width">Width</label>
-	<input type="text" id="width" name="width">
+	<div class="flex relative items-center ml-2">
+		<label for="width" class="block text-sm font-medium text-gray-700 ">Largeur</label>
+		<div class="mt-1 relative rounded-md shadow-sm ml-2">
+			<input type="text" name="width" id="width" class="focus:ring-indigo-500 focus:border-indigo-500 w-20 pr-12 sm:text-sm border-slate-800 bg-slate-200  rounded-md border-solid border-2" placeholder="0">
+		</div>
+	</div>
 
-	<label for="depth">Depth</label>
-	<input type="text" id="depth" name="depth">
+	<div class="flex items-center ml-2">
+		<label for="depth" class="block text-sm font-medium text-gray-700">Profondeur</label>
+		<div class="mt-1 relative rounded-md shadow-sm ml-2">
+			<input type="text" name="depth" id="depth" class="focus:ring-indigo-500 focus:border-indigo-500  w-20 block pr-12 sm:text-sm border-slate-800  bg-slate-200 rounded-md border-solid border-2" placeholder="0">
+		</div>
+	</div>
 
-	<button id="search">Search</button>
-
+	<div class="flex items-center ml-2">
+		<button id="search" class="mx-auto my-2 group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-light hover:bg-orange focus:outline-none focus:ring-2 focus:ring-offset-2">
+			Search
+		</button>
+	</div>
 </div>
-
 <ul id="resultList"></ul>
