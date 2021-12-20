@@ -60,7 +60,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/search/{keyWords}/{height}/{width}/{depth}", name="product_search_post", methods={"POST"})
      */
-    public function reSearch(
+    public function searchFromProductPage(
         Request $request,
         ProductRepository $productRepository,
         string $keyWords = null,
