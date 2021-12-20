@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Product{% endblock %}
+{% block title %}Modification d'un produit{% endblock %}
 
 {% block body %}
-    <h1>Edit Product</h1>
-
-    {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('product_index') }}">back to list</a>
-
-    {{ include('product/_delete_form.html.twig') }}
+<div class="flex max-w-full mt-6 content-between items-center gap-10">
+    <div class="w-3/6 justify-center max-w-full">
+        <h1>Modification d'un produit</h1>
+        {{ include('product/_form.html.twig', {'button_label': 'Sauvegarder les modifications'}) }}
+    </div>
+    <div class="w-2/6 max-w-xs content-center gap-10">
+        <img src="{{ product.picture }}" alt="{{ product.name }}" class="w-5/6 object-center object-contain">
+        <a class="" href="{{ path('product_index') }}">Revenir à la liste des produits</a>
+        {{ include('product/_delete_form.html.twig') }}
+    </div>
+</div>
 {% endblock %}

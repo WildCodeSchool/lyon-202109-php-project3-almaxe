@@ -1,58 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product{% endblock %}
+{% block title %}{{ product.name }}{% endblock %}
 
 {% block body %}
-    <h1>Product</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ product.name }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
-                <th>PriceCurrency</th>
-                <td>{{ product.priceCurrency }}</td>
-            </tr>
-            <tr>
-                <th>Height</th>
-                <td>{{ product.height }}</td>
-            </tr>
-            <tr>
-                <th>Width</th>
-                <td>{{ product.width }}</td>
-            </tr>
-            <tr>
-                <th>Depth</th>
-                <td>{{ product.depth }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ product.picture }}</td>
-            </tr>
-            <tr>
-                <th>Url</th>
-                <td>{{ product.url }}</td>
-            </tr>
-            <tr>
-                <th>PartnerProductId</th>
-                <td>{{ product.partnerProductId }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="bg-white">
+  <div class="pt-6">
 
-    <a href="{{ path('product_index') }}">back to list</a>
+    <!-- Image gallery -->
+    <div class="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
+        <div class="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
+            <img src="{{ product.picture }}" alt="Bureau {{ product.name }}" class="w-full h-full object-center object-contain">
+        </div>
+        <div class="mt-10">
+            <h1 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{{ product.name }}</h1>
+            <h2 class="text-sm font-medium text-gray-900">Caractéristiques</h3>
 
-    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+            <div class="mt-4">
+                <ul role="list" class="pl-4 list-disc text-sm space-y-2">
+                    <li class="text-gray-400"><span class="text-gray-600">Longueur : {{ product.width }}cm</span></li>
+                    <li class="text-gray-400"><span class="text-gray-600">Hauteur : {{ product.height }}cm</span></li>
+                    <li class="text-gray-400"><span class="text-gray-600">Profondeur : {{ product.depth }}cm</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="justify-around">
+            <a href="{{ path('product_index') }}" class="mt-10 w-full bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Revenir à la liste des produits</a>
 
-    {{ include('product/_delete_form.html.twig') }}
+            <a href="{{ path('product_edit', {'id': product.id}) }}" class="mt-10 w-full bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Modifier le produit</a>
+
+            {{ include('product/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

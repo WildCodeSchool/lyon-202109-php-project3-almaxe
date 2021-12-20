@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\Partner;
 use App\Form\ProductType;
 use App\Form\SearchDimensionsType;
 use App\Repository\ProductRepository;
