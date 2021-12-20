@@ -49,14 +49,17 @@ class ProductRepository extends ServiceEntityRepository
             $words = explode('%20', $words);
             $condition = "";
             $first = true;
-            foreach ($words as $word) {
+            for ($i = 0; $i < count($words); $i++) {
                 if ($first) {
-                    $condition .= "p.name LIKE '%$word%' ";
+                    $condition .= "p.name LIKE :word$i ";
                     $first = false;
                 }
-                $condition .= "OR p.name LIKE '%$word%' ";
+                $condition .= "OR p.name LIKE :word$i  ";
             }
             $query->andWhere($condition);
+            for ($i = 0; $i < count($words); $i++) {
+                $query->setParameter("word$i", "%$words[$i]%");
+            }
         }
 
         return (array) $query->getQuery()->getResult();

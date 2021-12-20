@@ -34,7 +34,7 @@ class HomeController extends AbstractController
             $depth = intval($search->get('depth')->getData());
             // redirect to result page giving keyWord as GET paramaters
             return $this->redirectToRoute(
-                'product_search',
+                'product_search_get',
                 ['keyWords' => $keyWords, 'width' => $width, 'height' => $height, 'depth' => $depth]
             );
         }
