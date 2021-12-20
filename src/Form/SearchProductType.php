@@ -17,9 +17,15 @@ class SearchProductType extends AbstractType
                 'label' => false,
                 'required' => false,
             ])
-            ->add('width', IntegerType::class, ['required' => false])
-            ->add('height', IntegerType::class, ['required' => false])
-            ->add('depth', IntegerType::class, ['required' => false]);
+            ->add('width', IntegerType::class, [
+                'required' => false,
+            ])
+            ->add('height', IntegerType::class, [
+                'required' => false,
+            ])
+            ->add('depth', IntegerType::class, [
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

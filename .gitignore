@@ -1,3 +1,4 @@
+/**.DS_Store
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -26,3 +27,5 @@ yarn-error.log
 /.phpcs-cache
 /phpcs.xml
 ###< squizlabs/php_codesniffer ###
+
+debug.log
