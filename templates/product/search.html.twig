@@ -9,7 +9,7 @@
 		<div class="">
 			<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 2xl:max-w-full">
 				<h2 class="mx-2 my-2">Meubles</h2>
-				<div class=" rounded-lg grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 2xl:grid-cols-6 2xl:gap-x-12 ">
+				<div class="rounded-lg grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 2xl:grid-cols-6 2xl:gap-x-12">
 					{% for product in products %}
 						<div class="block w-11/12 h-11/12 items-center mx-auto my-auto rounded-lg border-2 border-solid border-slate-300">
 						<a href="{{ path('product_show', {'id': product.id}) }}">

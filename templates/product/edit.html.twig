@@ -3,15 +3,17 @@
 {% block title %}Modification d'un produit{% endblock %}
 
 {% block body %}
-<div class="flex max-w-full mt-6 content-between items-center gap-10">
-    <div class="w-3/6 justify-center max-w-full">
-        <h1>Modification d'un produit</h1>
+<h1 class="m-10 text-2xl font-bold text-center">Modification du produit {{ product.name }}</h1>
+<div class="max-w-2xl mx-auto lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-x-8">
+    <div class="w-full justify-center max-w-full">
         {{ include('product/_form.html.twig', {'button_label': 'Sauvegarder les modifications'}) }}
     </div>
-    <div class="w-2/6 max-w-xs content-center gap-10">
+    <div class="flex flex-col mx-auto w-3/6 max-w-xs gap-10 justify-center">
         <img src="{{ product.picture }}" alt="{{ product.name }}" class="w-5/6 object-center object-contain">
-        <a class="" href="{{ path('product_index') }}">Revenir à la liste des produits</a>
-        {{ include('product/_delete_form.html.twig') }}
+        <div>
+            <a class="mt-10 w-full bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light" href="{{ path('product_index') }}">Revenir à la liste des produits</a>
+            {{ include('product/_delete_form.html.twig') }}
+        </div>
     </div>
 </div>
 {% endblock %}

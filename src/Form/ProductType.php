@@ -18,37 +18,37 @@ class ProductType extends AbstractType
             ->add('name', TextType::class, [
                 'attr' => ['class' => 'bg-gray-200 appearance-none border-2 border-gray-200
                  rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white 
-                 focus:border-orange'],
+                 focus:border-orange'], 'required' => true,
             ])
             ->add('price', IntegerType::class, [
                 'attr' => ['class' => 'bg-gray-200 appearance-none border-2 border-gray-200 
                 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white 
-                focus:border-orange'],
+                focus:border-orange'], 'required' => true,
             ])
             ->add('height', IntegerType::class, [
                 'attr' => ['class' => 'bg-gray-200 appearance-none border-2 border-gray-200
                 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white 
-                border-orange'],
+                border-orange'], 'required' => true,
             ])
             ->add('width', IntegerType::class, [
                 'attr' => ['class' => 'bg-gray-200 appearance-none border-2 border-gray-200 
                 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white 
-                focus:border-orange'],
+                focus:border-orange'], 'required' => true,
             ])
             ->add('depth', IntegerType::class, [
                 'attr' => ['class' => 'bg-gray-200 appearance-none border-2 border-gray-200
                  rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white 
-                 focus:border-orange'],
+                 focus:border-orange'], 'required' => true,
             ])
             ->add('picture', TextareaType::class, [
                 'attr' => ['class' => 'bg-gray-200 appearance-none border-2 border-gray-200 
                 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white 
-                focus:border-orange'],
+                focus:border-orange'], 'required' => true,
             ])
             ->add('url', TextareaType::class, [
                 'attr' => ['class' => 'bg-gray-200 appearance-none border-2 border-gray-200 
                 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white 
-                focus:border-orange'],
+                focus:border-orange'], 'required' => true,
             ]);
     }
 
