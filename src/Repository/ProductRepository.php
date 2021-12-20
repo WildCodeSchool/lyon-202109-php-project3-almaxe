@@ -24,7 +24,14 @@ class ProductRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('p');
 
-
+        if ($parameters['words'] != "all") {
+            $words = $parameters['words'];
+            $words = explode('%20', $words);
+            foreach ($words as $word) {
+                $query->orWhere("p.name LIKE :word ")
+                    ->setParameter("word", "%$word%");
+            }
+        }
 
         if ($parameters['height']) {
             $height = $parameters['height'];
@@ -42,24 +49,6 @@ class ProductRepository extends ServiceEntityRepository
             $depth = $parameters['depth'];
             $query->andWhere('p.depth <= :depth')
                 ->setParameter('depth', $depth);
-        }
-
-        if ($parameters['words'] != "all") {
-            $words = $parameters['words'];
-            $words = explode('%20', $words);
-            $condition = "";
-            $first = true;
-            for ($i = 0; $i < count($words); $i++) {
-                if ($first) {
-                    $condition .= "p.name LIKE :word$i ";
-                    $first = false;
-                }
-                $condition .= "OR p.name LIKE :word$i  ";
-            }
-            $query->andWhere($condition);
-            for ($i = 0; $i < count($words); $i++) {
-                $query->setParameter("word$i", "%$words[$i]%");
-            }
         }
 
         return (array) $query->getQuery()->getResult();
