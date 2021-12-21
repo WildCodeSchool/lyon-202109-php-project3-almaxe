@@ -1,18 +1,8 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}
-	{{ parent() }}
-	- Home
-{% endblock %}
-
-{% block stylesheets %}
-	{{ parent() }}
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-{% endblock %}
-
-{% block body %}
-
-	{% include "./home/_search_dimensions.html.twig" %}
-
-{% endblock %}
+{% extends 'base.html.twig' %} {% block title %}
+{{ parent() }}
+- Home {% endblock %} {% block stylesheets %}
+{{ parent() }}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+{% endblock %} {% block body %} {% include "_searchBar.html.twig" %} {% endblock
+%}

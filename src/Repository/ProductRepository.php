@@ -19,36 +19,38 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    public function findAllLesserThanDimensions(int $height, int $width, int $depth): array
+    public function searchProduct(array $parameters): array
     {
-        $qb = $this->createQueryBuilder('p');
 
-        if ($height) {
-            $qb->where('p.height <= :height')
+        $query = $this->createQueryBuilder('p');
+
+        if ($parameters['words'] != "all") {
+            $words = $parameters['words'];
+            $words = explode('%20', $words);
+            foreach ($words as $word) {
+                $query->orWhere("p.name LIKE :word ")
+                    ->setParameter("word", "%$word%");
+            }
+        }
+
+        if ($parameters['height']) {
+            $height = $parameters['height'];
+            $query->andWhere('p.height <= :height')
                 ->setParameter('height', $height);
         }
 
-        if ($width) {
-            if ($height) {
-                $qb->andWhere('p.width <= :width');
-            } else {
-                $qb->where('p.width <= :width');
-            }
-
-            $qb->setParameter('width', $width);
+        if ($parameters['width']) {
+            $width = $parameters['width'];
+            $query->andWhere('p.width <= :width')
+                ->setParameter('width', $width);
         }
 
-        if ($depth) {
-            if ($height || $width) {
-                $qb->andWhere('p.depth <= :depth');
-            } else {
-                $qb->where('p.depth <= :depth');
-            }
-            $qb->setParameter('depth', $depth);
+        if ($parameters['depth']) {
+            $depth = $parameters['depth'];
+            $query->andWhere('p.depth <= :depth')
+                ->setParameter('depth', $depth);
         }
 
-        $query = $qb->getQuery();
-
-        return (array) $query->execute();
+        return (array) $query->getQuery()->getResult();
     }
 }

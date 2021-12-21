@@ -9,13 +9,10 @@
 			<h2>{{ product.name }}</h2>
 			<a href="{{ path('product_show', {'id': product.id}) }}" target="_blank"><img src="{{ product.picture }}" width="300em" height="300em"></a><br>
 			<div class="dimensions">
-				<i>Hauteur :
-					{{ product.height }}
-					cm<br>Largeur :
-					{{ product.width }}
-					cm<br>Profondeur :
-					{{ product.depth }}
-					cm</i>
+				<i>Hauteur : {{ product.height }} cm
+				<br>Largeur : {{ product.width }} cm
+				<br>Profondeur : {{ product.depth }}cm
+				</i>
 			</div>
 			<div class="w-1/6">
 				<a class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light" href="{{ path('product_show', {'id': product.id}) }}">Voir le produit</a>

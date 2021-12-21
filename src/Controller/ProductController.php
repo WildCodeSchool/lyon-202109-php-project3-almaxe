@@ -4,18 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
-use App\Form\SearchDimensionsType;
+use App\Form\SearchProductType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/product")
- */
 class ProductController extends AbstractController
 {
     /**
@@ -23,8 +19,77 @@ class ProductController extends AbstractController
      */
     public function index(ProductRepository $productRepository): Response
     {
+
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/search/{keyWords}/{height}/{width}/{depth}", name="product_search_get", methods={"GET"})
+     */
+    public function search(
+        Request $request,
+        ProductRepository $productRepository,
+        string $keyWords = null,
+        int $width,
+        int $height,
+        int $depth
+    ): Response {
+        $products = $productRepository->searchProduct(
+            ['words' => $keyWords, 'width' => $width, 'height' => $height, 'depth' => $depth]
+        );
+
+        $form = $this->createForm(SearchProductType::class);
+        $data = $form->getData();
+        $form->setData($data);
+        $form->handleRequest($request);
+
+        return $this->render('product/search.html.twig', [
+            'form' => $form->createView(),
+            'products' => $products,
+        ]);
+    }
+
+
+    /**
+     * @Route("/search/{keyWords}/{height}/{width}/{depth}", name="product_search_post", methods={"POST"})
+     */
+    public function searchFromProductPage(
+        Request $request,
+        ProductRepository $productRepository,
+        string $keyWords = null,
+        int $width,
+        int $height,
+        int $depth
+    ): Response {
+        $form = $this->createForm(SearchProductType::class);
+
+        $search = $form->handleRequest($request);
+        $products = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $keyWords = $search->get('keyWords')->getData();
+            if ($keyWords != null) {
+                $keyWords = strval($keyWords);
+                $keyWords = implode('%20', explode(' ', $keyWords));
+            } else {
+                $keyWords = "all";
+            }
+
+
+            $width = intval($search->get('width')->getData());
+            $height = intval($search->get('height')->getData());
+            $depth = intval($search->get('depth')->getData());
+
+            $products = $productRepository->searchProduct(
+                ['words' => $keyWords, 'width' => $width, 'height' => $height, 'depth' => $depth]
+            );
+        }
+
+        return $this->render('product/search.html.twig', [
+            'form' => $form->createView(),
+            'products' => $products,
         ]);
     }
 
@@ -51,39 +116,6 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/search", name="search")
-     */
-    public function searchDimensions(Request $request, ProductRepository $productRepository): Response
-    {
-        $form = $this->createForm(SearchDimensionsType::class);
-        $data = $form->getData();
-        $form->setData($data);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            if (!is_array($data)) {
-                throw new Exception('Failed to parse data');
-            }
-
-            $width = intval($data['width']);
-            $height = intval($data['height']);
-            $depth = intval($data['depth']);
-
-            $products = $productRepository->findAllLesserThanDimensions($height, $width, $depth);
-
-            return $this->render('product/search.html.twig', [
-                'products' => $products,
-                'form' => $form->createView(),
-            ]);
-        }
-
-        return $this->render('product/search.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="product_show", methods={"GET"})
      */
     public function show(Product $product): Response
@@ -96,8 +128,11 @@ class ProductController extends AbstractController
     /**
      * @Route("/{id}/edit", name="product_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
-    {
+    public function edit(
+        Request $request,
+        Product $product,
+        EntityManagerInterface $entityManager
+    ): Response {
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
