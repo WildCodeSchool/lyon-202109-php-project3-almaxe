@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Form\SearchProductType;
 use App\Repository\ProductRepository;
+use App\Service\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -96,13 +97,16 @@ class ProductController extends AbstractController
     /**
      * @Route("/new", name="product_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Slugify $slugify): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $slug = $slugify->generate($product->getName());
+            $product->setSlug($slug);
             $entityManager->persist($product);
             $entityManager->flush();
 
@@ -116,7 +120,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_show", methods={"GET"})
+     * @Route("/{slug}", name="product_show", methods={"GET"})
      */
     public function show(Product $product): Response
     {

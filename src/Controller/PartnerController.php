@@ -49,7 +49,7 @@ class PartnerController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="partner_show", methods={"GET"})
+     * @Route("/{slug}", name="partner_show", methods={"GET"})
      */
     public function show(Partner $partner): Response
     {
