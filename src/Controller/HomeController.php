@@ -84,7 +84,7 @@ class HomeController extends AbstractController
         $form->setData($data);
         $form->handleRequest($request);
 
-        return $this->render('product/search.html.twig', [
+        return $this->render('home/search.html.twig', [
             'form' => $form->createView(),
             'products' => $products,
         ]);
@@ -131,7 +131,7 @@ class HomeController extends AbstractController
             );
         }
 
-        return $this->render('product/search.html.twig', [
+        return $this->render('home/search.html.twig', [
             'form' => $form->createView(),
             'products' => $products,
         ]);
