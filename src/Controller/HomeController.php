@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use Exception;
+use App\Entity\Category;
 use App\Form\SearchProductType;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class HomeController extends AbstractController
 {
@@ -21,22 +24,18 @@ class HomeController extends AbstractController
         $search = $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $keyWords = $search->get('keyWords')->getData();
-            if ($keyWords != null) {
-                $keyWords = strval($keyWords);
-                $keyWords = implode('%20', explode(' ', $keyWords));
-            } else {
-                $keyWords = "all";
+            $category = $search->get('category')->getData();
+            if (!$category instanceof Category) {
+                throw new Exception('Category not found');
             }
-
-
+            $categoryName = $category->getName();
             $width = intval($search->get('width')->getData());
             $height = intval($search->get('height')->getData());
             $depth = intval($search->get('depth')->getData());
             // redirect to result page giving keyWord as GET paramaters
             return $this->redirectToRoute(
                 'product_search_get',
-                ['keyWords' => $keyWords, 'width' => $width, 'height' => $height, 'depth' => $depth]
+                ['category' => $categoryName, 'width' => $width, 'height' => $height, 'depth' => $depth]
             );
         }
 
@@ -46,18 +45,19 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/search/{keyWords}/{height}/{width}/{depth}", name="product_search_get", methods={"GET"})
+     * @Route("/search/{category}/{height}/{width}/{depth}", name="product_search_get", methods={"GET"})
+     * @ParamConverter("category", options={"mapping": {"category": "name"}})
      */
     public function search(
         Request $request,
         ProductRepository $productRepository,
-        string $keyWords = null,
+        Category $category,
         int $width,
         int $height,
         int $depth
     ): Response {
         $products = $productRepository->searchProduct(
-            ['words' => $keyWords, 'width' => $width, 'height' => $height, 'depth' => $depth]
+            ['category' => $category, 'width' => $width, 'height' => $height, 'depth' => $depth]
         );
 
         $form = $this->createForm(SearchProductType::class);
@@ -73,12 +73,13 @@ class HomeController extends AbstractController
 
 
     /**
-     * @Route("/search/{keyWords}/{height}/{width}/{depth}", name="product_search_post", methods={"POST"})
+     * @Route("/search/{category}/{height}/{width}/{depth}", name="product_search_post", methods={"POST"})
+     * @ParamConverter("category", options={"mapping": {"category": "name"}})
      */
     public function searchFromProductPage(
         Request $request,
         ProductRepository $productRepository,
-        string $keyWords = null,
+        Category $category,
         int $width,
         int $height,
         int $depth
@@ -89,21 +90,13 @@ class HomeController extends AbstractController
         $products = [];
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $keyWords = $search->get('keyWords')->getData();
-            if ($keyWords != null) {
-                $keyWords = strval($keyWords);
-                $keyWords = implode('%20', explode(' ', $keyWords));
-            } else {
-                $keyWords = "all";
-            }
-
-
+            $category = $search->get('category')->getData();
             $width = intval($search->get('width')->getData());
             $height = intval($search->get('height')->getData());
             $depth = intval($search->get('depth')->getData());
 
             $products = $productRepository->searchProduct(
-                ['words' => $keyWords, 'width' => $width, 'height' => $height, 'depth' => $depth]
+                ['category' => $category, 'width' => $width, 'height' => $height, 'depth' => $depth]
             );
         }
 
