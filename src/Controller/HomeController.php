@@ -29,13 +29,20 @@ class HomeController extends AbstractController
                 throw new Exception('Category not found');
             }
             $categoryName = $category->getName();
+            $criteria = $search->get('criteria')->getData();
             $width = intval($search->get('width')->getData());
             $height = intval($search->get('height')->getData());
             $depth = intval($search->get('depth')->getData());
             // redirect to result page giving keyWord as GET paramaters
             return $this->redirectToRoute(
                 'product_search_get',
-                ['category' => $categoryName, 'width' => $width, 'height' => $height, 'depth' => $depth]
+                [
+                    'category' => $categoryName,
+                    'width' => $width,
+                    'height' => $height,
+                    'depth' => $depth,
+                    'criteria' => $criteria
+                ]
             );
         }
 
@@ -45,19 +52,26 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/search/{category}/{height}/{width}/{depth}", name="product_search_get", methods={"GET"})
+     * @Route("/search/{category}/{criteria}/{height}/{width}/{depth}", name="product_search_get", methods={"GET"})
      * @ParamConverter("category", options={"mapping": {"category": "name"}})
      */
     public function search(
         Request $request,
         ProductRepository $productRepository,
         Category $category,
+        string $criteria,
         int $width,
         int $height,
         int $depth
     ): Response {
         $products = $productRepository->searchProduct(
-            ['category' => $category, 'width' => $width, 'height' => $height, 'depth' => $depth]
+            [
+                'category' => $category,
+                'width' => $width,
+                'height' => $height,
+                'depth' => $depth,
+                'criteria' => $criteria
+            ]
         );
 
         $form = $this->createForm(SearchProductType::class);
@@ -73,13 +87,14 @@ class HomeController extends AbstractController
 
 
     /**
-     * @Route("/search/{category}/{height}/{width}/{depth}", name="product_search_post", methods={"POST"})
+     * @Route("/search/{category}/{criteria}/{height}/{width}/{depth}", name="product_search_post", methods={"POST"})
      * @ParamConverter("category", options={"mapping": {"category": "name"}})
      */
     public function searchFromProductPage(
         Request $request,
         ProductRepository $productRepository,
         Category $category,
+        string $criteria,
         int $width,
         int $height,
         int $depth
@@ -91,12 +106,19 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $search->get('category')->getData();
+            $criteria = $search->get('criteria')->getData();
             $width = intval($search->get('width')->getData());
             $height = intval($search->get('height')->getData());
             $depth = intval($search->get('depth')->getData());
 
             $products = $productRepository->searchProduct(
-                ['category' => $category, 'width' => $width, 'height' => $height, 'depth' => $depth]
+                [
+                    'category' => $category,
+                    'width' => $width,
+                    'height' => $height,
+                    'depth' => $depth,
+                    'criteria' => $criteria
+                ]
             );
         }
 

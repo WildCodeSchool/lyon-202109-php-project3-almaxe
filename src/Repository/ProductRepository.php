@@ -24,6 +24,8 @@ class ProductRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('p');
 
+        $criteria = $parameters['criteria'] == 'min' ? '>' : '<';
+
         if ($parameters['category']) {
             $category = $parameters['category'];
             $query->andWhere('p.category = :category')
@@ -32,19 +34,19 @@ class ProductRepository extends ServiceEntityRepository
 
         if ($parameters['height']) {
             $height = $parameters['height'];
-            $query->andWhere('p.height <= :height')
+            $query->andWhere('p.height ' . $criteria . '= :height')
                 ->setParameter('height', $height);
         }
 
         if ($parameters['width']) {
             $width = $parameters['width'];
-            $query->andWhere('p.width <= :width')
+            $query->andWhere('p.width ' . $criteria . '= :width')
                 ->setParameter('width', $width);
         }
 
         if ($parameters['depth']) {
             $depth = $parameters['depth'];
-            $query->andWhere('p.depth <= :depth')
+            $query->andWhere('p.depth ' . $criteria . '= :depth')
                 ->setParameter('depth', $depth);
         }
 
