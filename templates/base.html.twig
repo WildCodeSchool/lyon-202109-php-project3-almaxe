@@ -18,7 +18,9 @@
 	<body>
 		<header>
 			<div class="my-2">
-				<img src="{{ asset('build/images/logo.png') }}" alt="Logo de pile poil" class="w-20 h-20">
+				<a href="{{ path('home') }}">
+					<img src="{{ asset('build/images/logo.png') }}" alt="Logo de pile poil" class="w-20 h-20">
+				</a>
 			</div>
 		</header>
 		{% block body %}{% endblock %}
