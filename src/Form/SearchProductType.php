@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 
 class SearchProductType extends AbstractType
 {
@@ -31,6 +32,9 @@ class SearchProductType extends AbstractType
             ->add('criteria', ChoiceType::class, [
                 'choices' => ['Minimum' => 'min', 'Maximum' => 'max'],
                 'required' => true,
+            ])
+            ->add('price', IntegerType::class, [
+                'required' => false
             ]);
     }
 

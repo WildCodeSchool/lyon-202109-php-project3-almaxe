@@ -50,6 +50,12 @@ class ProductRepository extends ServiceEntityRepository
                 ->setParameter('depth', $depth);
         }
 
+        if ($parameters['price']) {
+            $price = $parameters['price'];
+            $query->andWhere('p.price <= :price')
+                ->setParameter('price', $price);
+        }
+
         return (array) $query->getQuery()->getResult();
     }
 }
