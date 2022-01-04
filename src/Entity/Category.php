@@ -17,17 +17,17 @@ class Category
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
      */
-    private $products;
+    private ArrayCollection $products;
 
     public function __construct()
     {

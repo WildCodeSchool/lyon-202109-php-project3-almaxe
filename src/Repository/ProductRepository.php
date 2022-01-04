@@ -24,13 +24,10 @@ class ProductRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('p');
 
-        if ($parameters['words'] != "all") {
-            $words = $parameters['words'];
-            $words = explode('%20', $words);
-            foreach ($words as $word) {
-                $query->orWhere("p.name LIKE :word ")
-                    ->setParameter("word", "%$word%");
-            }
+        if ($parameters['category']) {
+            $category = $parameters['category'];
+            $query->andWhere('p.category = :category')
+                ->setParameter('category', $category);
         }
 
         if ($parameters['height']) {

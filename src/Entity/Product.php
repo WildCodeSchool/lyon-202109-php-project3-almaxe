@@ -72,7 +72,7 @@ class Product
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      */
-    private $category;
+    private ?Category $category;
 
     public function getId(): ?int
     {
