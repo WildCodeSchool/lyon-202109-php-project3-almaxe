@@ -36,7 +36,7 @@ class ProductCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name', 'Nom du produit :'),
-            ImageField::new('picture', 'Logo ;')
+            ImageField::new('picture', 'Logo :')
                 ->setBasePath('public/build/images/partner/')
                 ->setUploadDir('public/build/images/partner/')
                 ->setRequired(false),

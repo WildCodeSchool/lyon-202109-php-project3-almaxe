@@ -27,15 +27,14 @@ class PartnerCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            ImageField::new('picture', 'Logo')
+            ImageField::new('picture', 'Url du Logo : ')
                 ->setUploadDir('public/build/images/partner/')
                 ->setRequired(false),
-            TextField::new('picture', 'logo')
+            TextField::new('picture', 'Url Du Logo :')
                 ->onlyOnForms(),
-            TextField::new('name', 'Nom du partenaire'),
-            BooleanField::new('active', 'Status'),
-            TextField::new('affiliateKey', 'Clé affilier'),
+            TextField::new('name', 'Nom du partenaire :'),
+            BooleanField::new('active', 'Status :'),
+            TextField::new('affiliateKey', 'Clé affilier :'),
         ];
     }
-
 }
