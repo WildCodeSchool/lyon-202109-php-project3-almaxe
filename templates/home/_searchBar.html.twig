@@ -1,70 +1,7 @@
 {{ form_start(form) }}
-<div class="justify-center flex flex-wrap mx-1">
-	<div class="flex relative items-center">
-		{{ form_label(form.criteria, "Critère", {
-                label_attr: {
-                    class: "block text-sm font-medium text-gray-700 "
-                }
-            }) }}
-		<div class="mt-1 relative rounded-md shadow-sm ml-2">
-			{{ form_widget(form.criteria, {
-                    attr: {
-                        class: "focus:ring-indigo-500 focus:border-indigo-500 w-20 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2",
-                    }
-                }) }}
-		</div>
-	</div>
-
-	<div class="flex relative items-center ml-2">
-		{{ form_label(form.height, "H", {
-                label_attr: {
-                    class: "block text-sm font-medium text-gray-700 "
-                }
-            }) }}
-		<div class="mt-1 relative rounded-md shadow-sm ml-2">
-			{{ form_widget(form.height, {
-                    attr: {
-                        class: "focus:ring-indigo-500 focus:border-indigo-500 w-20 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2",
-                        placeholder: "0"
-                    }
-                }) }}
-		</div>
-	</div>
-
-	<div class="flex relative items-center ml-2">
-		{{ form_label(form.width, "L", {
-                label_attr: {
-                    class: "block text-sm font-medium text-gray-700 "
-                }
-            }) }}
-		<div class="mt-1 relative rounded-md shadow-sm ml-2">
-			{{ form_widget(form.width, {
-                    attr: {
-                        class: "focus:ring-indigo-500 focus:border-indigo-500 w-20 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2",
-                        placeholder: "0"
-                    }
-                }) }}
-		</div>
-	</div>
-
+<div class="items-center flex flex-col flex-wrap">
 	<div class="flex items-center ml-2">
-		{{ form_label(form.depth, "P", {
-                label_attr: {
-                    class: "block text-sm font-medium text-gray-700 "
-                }
-            }) }}
-		<div class="mt-1 relative rounded-md shadow-sm ml-2">
-			{{ form_widget(form.depth, {
-                    attr: {
-                        class: "focus:ring-indigo-500 focus:border-indigo-500 w-20 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2",
-                        placeholder: "0"
-                    }
-                }) }}
-		</div>
-	</div>
-
-	<div class="flex items-center ml-2">
-		{{ form_label(form.category, "Catégorie", {
+		{{ form_label(form.category, "Je recherche", {
                 label_attr: {
                     class: "block text-sm font-medium text-gray-700 "
                 }
@@ -78,9 +15,88 @@
                 }) }}
 		</div>
 	</div>
+	<p class="text-sm font-medium text-gray-700 mt-4">Avec les dimensions:</p>
+	<div class="justify-center flex flex-wrap mx-1">
+		<div class="flex relative items-center">
+			{{ form_label(form.criteriaHeight, "Hauteur", {
+                label_attr: {
+                    class: "block text-sm font-medium text-gray-700 "
+                }
+            }) }}
+			<div class="mt-1 relative rounded-md shadow-sm ml-2">
+				{{ form_widget(form.criteriaHeight, {
+                    attr: {
+                        class: "focus:ring-indigo-500 focus:border-indigo-500 w-20 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2",
+                    }
+                }) }}
+			</div>
+		</div>
 
-	<div class="flex items-center ml-2">
-		{{ form_label(form.price, "Prix", {
+		<div class="flex relative items-center ml-2">
+			<div class="mt-1 relative rounded-md shadow-sm ml-2">
+				{{ form_widget(form.height, {
+                    attr: {
+                        class: "focus:ring-indigo-500 focus:border-indigo-500 w-20 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2",
+                        placeholder: "0"
+                    }
+                }) }}
+			</div>
+		</div>
+
+		<div class="flex relative items-center ml-2">
+			{{ form_label(form.criteriaWidth, "Largeur", {
+                label_attr: {
+                    class: "block text-sm font-medium text-gray-700 "
+                }
+            }) }}
+			<div class="mt-1 relative rounded-md shadow-sm ml-2">
+				{{ form_widget(form.criteriaWidth, {
+                    attr: {
+                        class: "focus:ring-indigo-500 focus:border-indigo-500 w-20 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2",
+                    }
+                }) }}
+			</div>
+		</div>
+
+		<div class="flex relative items-center ml-2">
+			<div class="mt-1 relative rounded-md shadow-sm ml-2">
+				{{ form_widget(form.width, {
+                    attr: {
+                        class: "focus:ring-indigo-500 focus:border-indigo-500 w-20 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2",
+                        placeholder: "0"
+                    }
+                }) }}
+			</div>
+		</div>
+
+		<div class="flex relative items-center ml-2">
+			{{ form_label(form.criteriaDepth, "Profondeur", {
+                label_attr: {
+                    class: "block text-sm font-medium text-gray-700 "
+                }
+            }) }}
+			<div class="mt-1 relative rounded-md shadow-sm ml-2">
+				{{ form_widget(form.criteriaDepth, {
+                    attr: {
+                        class: "focus:ring-indigo-500 focus:border-indigo-500 w-20 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2",
+                    }
+                }) }}
+			</div>
+		</div>
+		<div class="flex items-center ml-2">
+			<div class="mt-1 relative rounded-md shadow-sm ml-2">
+				{{ form_widget(form.depth, {
+                    attr: {
+                        class: "focus:ring-indigo-500 focus:border-indigo-500 w-20 sm:text-sm border-slate-800 bg-slate-200 rounded-md border-solid border-2",
+                        placeholder: "0"
+                    }
+                }) }}
+			</div>
+		</div>
+
+	</div>
+	<div class="flex items-center ml-2 mt-4">
+		{{ form_label(form.price, "Prix maximum (€)", {
                 label_attr: {
                     class: "block text-sm font-medium text-gray-700 "
                 }
@@ -95,11 +111,11 @@
 		</div>
 	</div>
 
-	<div class="flex items-center ml-2">
+	<div class="flex items-center ml-2 mt-2">
 		<button id="btn" class="mx-auto my-2 group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-light hover:bg-orange focus:outline-none focus:ring-2 focus:ring-offset-2">
 			{{ button_label|default('Rechercher') }}
 		</button>
 	</div>
-
 </div>
+
 {{ form_end(form) }}

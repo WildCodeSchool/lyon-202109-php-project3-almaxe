@@ -29,7 +29,15 @@ class SearchProductType extends AbstractType
             ->add('depth', IntegerType::class, [
                 'required' => false,
             ])
-            ->add('criteria', ChoiceType::class, [
+            ->add('criteriaWidth', ChoiceType::class, [
+                'choices' => ['Minimum' => 'min', 'Maximum' => 'max'],
+                'required' => true,
+            ])
+            ->add('criteriaHeight', ChoiceType::class, [
+                'choices' => ['Minimum' => 'min', 'Maximum' => 'max'],
+                'required' => true,
+            ])
+            ->add('criteriaDepth', ChoiceType::class, [
                 'choices' => ['Minimum' => 'min', 'Maximum' => 'max'],
                 'required' => true,
             ])

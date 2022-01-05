@@ -10,7 +10,7 @@ class CategoryFixtures extends Fixture
 {
     public const NAME = [
         'table',
-        'desk',
+        'bureau',
     ];
 
     public function load(ObjectManager $manager): void

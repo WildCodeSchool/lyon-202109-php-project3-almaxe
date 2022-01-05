@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Service\HandleProductRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -24,7 +25,11 @@ class ProductRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('p');
 
-        $criteria = $parameters['criteria'] == 'min' ? '>' : '<';
+        $service = new HandleProductRepositoryInterface();
+
+        $criteriaWidth = $service->getDimensionCriteria($parameters['criteriaWidth']);
+        $criteriaDepth = $service->getDimensionCriteria($parameters['criteriaDepth']);
+        $criteriaHeight = $service->getDimensionCriteria($parameters['criteriaHeight']);
 
         if ($parameters['category']) {
             $category = $parameters['category'];
@@ -34,19 +39,19 @@ class ProductRepository extends ServiceEntityRepository
 
         if ($parameters['height']) {
             $height = $parameters['height'];
-            $query->andWhere('p.height ' . $criteria . '= :height')
+            $query->andWhere('p.height ' . $criteriaHeight . '= :height')
                 ->setParameter('height', $height);
         }
 
         if ($parameters['width']) {
             $width = $parameters['width'];
-            $query->andWhere('p.width ' . $criteria . '= :width')
+            $query->andWhere('p.width ' . $criteriaWidth . '= :width')
                 ->setParameter('width', $width);
         }
 
         if ($parameters['depth']) {
             $depth = $parameters['depth'];
-            $query->andWhere('p.depth ' . $criteria . '= :depth')
+            $query->andWhere('p.depth ' . $criteriaDepth . '= :depth')
                 ->setParameter('depth', $depth);
         }
 
