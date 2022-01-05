@@ -44,7 +44,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/search", name="product_search", methods={"POST"})
+     * @Route("/search", name="product_search", methods={"GET", "POST"})
      */
     public function searchFromProductPage(
         Request $request,
