@@ -3,8 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Product;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class ProductFixtures extends Fixture
 {
@@ -88,6 +88,17 @@ class ProductFixtures extends Fixture
             '4-personnes-blanche-et-grise-110-cm/p/N62523575'
     ];
 
+    public const CATEGORY = [
+        '1',
+        '1',
+        '1',
+        '1',
+        '0',
+        '0',
+        '0',
+        '0'
+    ];
+
     public function load(ObjectManager $manager): void
     {
         foreach (self::NAME as $key => $productName) {
@@ -102,6 +113,7 @@ class ProductFixtures extends Fixture
             $product->setUrl(self::URL[$key]);
             $product->setPartnerProductId('Produit n°' . $key);
             $product->setPartner($this->getReference('partenaire_1'));
+            $product->setCategory($this->getReference('category_' . self::CATEGORY[$key]));
             $manager->persist($product);
         }
         $manager->flush();
@@ -110,7 +122,8 @@ class ProductFixtures extends Fixture
     public function getDependencies()
     {
         return [
-            PartnerFixtures::class
+            PartnerFixtures::class,
+            CategoryFixtures::class
         ];
     }
 }
