@@ -37,15 +37,16 @@ class ProductCrudController extends AbstractCrudController
         return [
             TextField::new('name', 'Nom du produit :'),
             ImageField::new('picture', 'Logo :')
-                ->setBasePath('public/build/images/partner/')
-                ->setUploadDir('public/build/images/partner/')
+                ->setBasePath('public/build/images/product/')
+                ->setUploadDir('public/build/images/product/')
                 ->setRequired(false),
             TextField::new('picture', 'Logo :')
                 ->onlyOnForms(),
             TextField::new('url', 'Lien vers le produit : ')
                 ->onlyOnForms(),
-            IntegerField::new('Price', 'Prix :'),
-            TextField::new('priceCurrency', 'Prix concurrent :'),
+            IntegerField::new('Price', 'Prix :')
+                ->setRequired(true),
+            TextField::new('priceCurrency', 'Devise :'),
             IntegerField::new('height', 'Hauteur :'),
             IntegerField::new('width', 'Largeur :'),
             IntegerField::new('depth', 'Profondeur :'),

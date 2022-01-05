@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,15 +22,11 @@ class AdminController extends AbstractDashboardController
     }
 
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/admin", name="admin_dashboard")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function index(): Response
     {
-
-        // return parent::index();
-
-        // $adminUrlGenerator = $this->get(AdminUrlGenerator::class);
-
         return $this->redirect($this->adminUrlGenerator->setController(ProductCrudController::class)->generateUrl());
     }
 
@@ -52,7 +49,7 @@ class AdminController extends AbstractDashboardController
         MenuItem::linkToCrud('Vos partenaire', "fas fa-comments", Partner::class),
         MenuItem::linkToCrud('Ajouter un partenaire', 'fa fa-tags', Partner::class)
         ->setAction('new'),
-        // MenuItem::linkToLogout('Logout', 'fa fa-exit'),
+        MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out'),
         ];
     }
 }
