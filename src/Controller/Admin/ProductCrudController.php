@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -22,7 +23,7 @@ class ProductCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setSearchFields(['name', 'price'])
+            ->setSearchFields(['name', 'price', 'category.name'])
             ->setPaginatorPageSize(30);
     }
 
@@ -44,15 +45,17 @@ class ProductCrudController extends AbstractCrudController
                 ->onlyOnForms(),
             TextField::new('url', 'Lien vers le produit : ')
                 ->onlyOnForms(),
-            IntegerField::new('Price', 'Prix :')
-                ->setRequired(true),
-            TextField::new('priceCurrency', 'Devise :'),
+            MoneyField::new('Price', 'Prix :')
+                ->setRequired(true)
+                ->setCurrency('EUR'),
             IntegerField::new('height', 'Hauteur :'),
             IntegerField::new('width', 'Largeur :'),
             IntegerField::new('depth', 'Profondeur :'),
             SlugField::new('slug')
                 ->setTargetFieldName('name')
                 ->onlyOnForms(),
+            TextField::new('category.name', 'Categorie'),
+            TextField::new('partner.name', 'Partenaire'),
         ];
     }
 }

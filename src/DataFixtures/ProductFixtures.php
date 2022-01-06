@@ -3,8 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Product;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class ProductFixtures extends Fixture
 {
@@ -98,6 +98,17 @@ class ProductFixtures extends Fixture
         'table-a-manger-rozy'
     ];
 
+    public const CATEGORY = [
+        '1',
+        '1',
+        '1',
+        '1',
+        '0',
+        '0',
+        '0',
+        '0'
+    ];
+
     public function load(ObjectManager $manager): void
     {
         foreach (self::NAME as $key => $productName) {
@@ -113,6 +124,7 @@ class ProductFixtures extends Fixture
             $product->setSlug((self::SLUG[$key]));
             $product->setPartnerProductId('Produit n°' . $key);
             $product->setPartner($this->getReference('partenaire_1'));
+            $product->setCategory($this->getReference('category_' . self::CATEGORY[$key]));
             $manager->persist($product);
         }
         $manager->flush();
@@ -121,7 +133,8 @@ class ProductFixtures extends Fixture
     public function getDependencies()
     {
         return [
-            PartnerFixtures::class
+            PartnerFixtures::class,
+            CategoryFixtures::class
         ];
     }
 }
