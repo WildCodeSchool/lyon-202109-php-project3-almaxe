@@ -9,7 +9,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -45,9 +44,9 @@ class ProductCrudController extends AbstractCrudController
                 ->onlyOnForms(),
             TextField::new('url', 'Lien vers le produit : ')
                 ->onlyOnForms(),
-            MoneyField::new('Price', 'Prix :')
-                ->setRequired(true)
-                ->setCurrency('EUR'),
+            IntegerField::new('price', 'Prix :')
+                ->setRequired(true),
+            TextField::new('priceCurrency', 'Devise'),
             IntegerField::new('height', 'Hauteur :'),
             IntegerField::new('width', 'Largeur :'),
             IntegerField::new('depth', 'Profondeur :'),

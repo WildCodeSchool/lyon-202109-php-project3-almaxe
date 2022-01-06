@@ -1,36 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ product.name }}{% endblock %}
+{% block title %}
+	{{ product.name }}
+{% endblock %}
 
 {% block body %}
 
-<div class="bg-white">
-  <div class="pt-6">
+	<div class="bg-white">
+		<div
+			class="pt-6">
 
-    <!-- Image gallery -->
-    <div class="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
-        <div class="rounded-lg overflow-hidden lg:block">
-            <img src="{{ product.picture }}" alt="Bureau {{ product.name }}" class="w-full h-full object-center object-contain">
-        </div>
-        <div class="m-10">
-            <h1 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{{ product.name }}</h1>
-            <h2 class="text-sm font-medium text-gray-900">Caractéristiques</h3>
+			<!-- Image gallery -->
+			<div class="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
+				<div class="rounded-lg overflow-hidden lg:block">
+					<img src="{{ product.picture }}" alt="Bureau {{ product.name }}" class="w-full h-full object-center object-contain">
+				</div>
+				<div class="m-10">
+					<h1 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{{ product.name }}</h1>
+					<h2 class="text-sm font-medium text-gray-900">Caractéristiques</h3>
 
-            <div class="mt-4">
-                <ul role="list" class="pl-4 list-disc text-sm space-y-2">
-                    <li class="text-gray-400"><span class="text-gray-600">Longueur : {{ product.width }}cm</span></li>
-                    <li class="text-gray-400"><span class="text-gray-600">Hauteur : {{ product.height }}cm</span></li>
-                    <li class="text-gray-400"><span class="text-gray-600">Profondeur : {{ product.depth }}cm</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="m-5 w-10/12 justify-center">
-            <a href="{{ path('product_index') }}" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Revenir à la liste des produits</a>
+					<div class="mt-4">
+						<ul role="list" class="pl-4 list-disc text-sm space-y-2">
+							<li class="text-gray-400">
+								<span class="text-gray-600">Longueur :
+									{{ product.width }}cm</span>
+							</li>
+							<li class="text-gray-400">
+								<span class="text-gray-600">Hauteur :
+									{{ product.height }}cm</span>
+							</li>
+							<li class="text-gray-400">
+								<span class="text-gray-600">Profondeur :
+									{{ product.depth }}cm</span>
+							</li>
+						</ul>
+					</div>
+					<div class="mt-4">
+						<h3>
+							Prix :
+							{{product.price}}
+							&euro;
+						</h3>
+					</div>
+				</div>
+				<div class="m-5 w-10/12 justify-center">
+					<a href="{{ path('product_index') }}" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Revenir à la liste des produits</a>
+					<a href="{{ product.url }}" target="_blank" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Voir chez le partenaire</a>
 
-            <a href="{{ path('product_edit', {'id': product.id}) }}" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Modifier le produit</a>
-            <div class="w-10/12">
-                {{ include('product/_delete_form.html.twig') }}
-            </div>
-        </div>
-    </div>
-{% endblock %}
+					{% if is_granted("ROLE_ADMIN") %}
+						<a href="{{ path('product_edit', {'id': product.id}) }}" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Modifier le produit</a>
+						<div class="w-10/12">
+							{{ include('product/_delete_form.html.twig') }}
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		{% endblock %}
