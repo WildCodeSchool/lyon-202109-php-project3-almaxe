@@ -37,16 +37,13 @@
 					</div>
 					<div class="mt-4">
 						<h3>
-							Prix :
-							{{product.price}}
-							&euro;
+							Prix : {{ product.price }} &euro;
 						</h3>
 					</div>
 				</div>
 				<div class="m-5 w-10/12 justify-center">
 					<a href="{{ path('product_index') }}" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Revenir à la liste des produits</a>
 					<a href="{{ product.url }}" target="_blank" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Voir chez le partenaire</a>
-
 					{% if is_granted("ROLE_ADMIN") %}
 						<a href="{{ path('product_edit', {'id': product.id}) }}" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Modifier le produit</a>
 						<div class="w-10/12">
