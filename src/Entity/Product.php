@@ -70,6 +70,11 @@ class Product
     private Partner $partner;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $slug;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      */
     private ?Category $category;
@@ -195,6 +200,18 @@ class Product
     public function setPartner(Partner $partner): self
     {
         $this->partner = $partner;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

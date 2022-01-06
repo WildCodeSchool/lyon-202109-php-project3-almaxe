@@ -18,8 +18,8 @@ class PartnerFixtures extends Fixture
         'Meubles.fr',
         'Leroy Merlin',
         'Made',
-
     ];
+
     public const AFFILIATE_KEY = [
         '',
         'Affiliate Key Ikea',
@@ -50,7 +50,6 @@ class PartnerFixtures extends Fixture
         'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Leroy_Merlin.svg/1200px-Leroy_Merlin.svg.png',
         'https://medias.oas.io/medias/2019/09/03/21/made-com-o.png',
     ];
-
 
     public function load(ObjectManager $manager)
     {
