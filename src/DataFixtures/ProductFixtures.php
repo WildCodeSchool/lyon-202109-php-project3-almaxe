@@ -3,8 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Product;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class ProductFixtures extends Fixture
 {
@@ -87,6 +87,27 @@ class ProductFixtures extends Fixture
         'https://www.conforama.fr/canape-salon-sejour/sejour/table/table-a-manger-rozy-' .
             '4-personnes-blanche-et-grise-110-cm/p/N62523575'
     ];
+    public const SLUG = [
+        'fredde',
+        'uppsel',
+        'malvakt-alex',
+        'utespelare',
+        'table-brooklyn',
+        'table-a-manger-georgia',
+        'table-scandinave-extensible',
+        'table-a-manger-rozy'
+    ];
+
+    public const CATEGORY = [
+        '1',
+        '1',
+        '1',
+        '1',
+        '0',
+        '0',
+        '0',
+        '0'
+    ];
 
     public function load(ObjectManager $manager): void
     {
@@ -100,8 +121,10 @@ class ProductFixtures extends Fixture
             $product->setDepth(self::DEPTH[$key]);
             $product->setPicture(self::PICTURE[$key]);
             $product->setUrl(self::URL[$key]);
+            $product->setSlug((self::SLUG[$key]));
             $product->setPartnerProductId('Produit n°' . $key);
             $product->setPartner($this->getReference('partenaire_1'));
+            $product->setCategory($this->getReference('category_' . self::CATEGORY[$key]));
             $manager->persist($product);
         }
         $manager->flush();
@@ -110,7 +133,8 @@ class ProductFixtures extends Fixture
     public function getDependencies()
     {
         return [
-            PartnerFixtures::class
+            PartnerFixtures::class,
+            CategoryFixtures::class
         ];
     }
 }
