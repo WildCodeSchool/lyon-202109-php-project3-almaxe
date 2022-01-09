@@ -14,7 +14,7 @@ class CrawlerController extends AbstractController
      */
     public function index(CrawlerMaisonDuMondeInterface $crawler): Response
     {
-        $crawler->getData();
+        $crawler->main();
         return $this->render('crawler/index.html.twig', [
             'controller_name' => 'CrawlerController',
         ]);
