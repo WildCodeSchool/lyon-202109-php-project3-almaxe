@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
-use App\Service\HandleProductRepositoryInterface;
+use App\Service\ProductRepositoryManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -25,7 +25,7 @@ class ProductRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('p');
 
-        $service = new HandleProductRepositoryInterface();
+        $service = new ProductRepositoryManager();
 
         $criteriaWidth = $service->getDimensionCriteria($parameters['criteriaWidth']);
         $criteriaDepth = $service->getDimensionCriteria($parameters['criteriaDepth']);

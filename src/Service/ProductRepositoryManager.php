@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class HandleProductRepositoryInterface
+class ProductRepositoryManager
 {
     public function getDimensionCriteria(string $criteria): string
     {
