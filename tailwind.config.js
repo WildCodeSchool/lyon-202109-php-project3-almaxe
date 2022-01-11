@@ -9,7 +9,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                body: ['Modern No. 20', 'sans-serif'],
+                body: ['sans-serif'],
             },
             colors: {
                 transparent: 'transparent',
@@ -36,15 +36,12 @@ module.exports = {
                     DEFAULT: '#00000',
                 },
                 red: '#F44336',
-
             },
         },
     },
     variants: {
         extend: {},
     },
-    plugins: [
-        require('@tailwindcss/aspect-ratio'),
-    ],
+    plugins: [require('@tailwindcss/aspect-ratio')],
 };
 /* eslint-enable global-require */
