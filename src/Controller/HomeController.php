@@ -57,23 +57,23 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $search->get('category')->getData();
-            $criteriaWidth = $search->get('criteriaWidth')->getData();
-            $criteriaDepth = $search->get('criteriaDepth')->getData();
-            $criteriaHeight = $search->get('criteriaHeight')->getData();
-            $width = intval($search->get('width')->getData());
-            $height = intval($search->get('height')->getData());
-            $depth = intval($search->get('depth')->getData());
+            $minWidth = $search->get('minWidth')->getData();
+            $minDepth = $search->get('minDepth')->getData();
+            $minHeight = $search->get('minHeight')->getData();
+            $maxWidth = $search->get('maxWidth')->getData();
+            $maxDepth = $search->get('maxDepth')->getData();
+            $maxHeight = $search->get('maxHeight')->getData();
             $price = intval($search->get('price')->getData());
 
             $products = $productRepository->searchProduct(
                 [
                     'category' => $category,
-                    'width' => $width,
-                    'height' => $height,
-                    'depth' => $depth,
-                    'criteriaWidth' => $criteriaWidth,
-                    'criteriaDepth' => $criteriaDepth,
-                    'criteriaHeight' => $criteriaHeight,
+                    'minWidth' => $minWidth,
+                    'minDepth' => $minDepth,
+                    'minHeight' => $minHeight,
+                    'maxWidth' => $maxWidth,
+                    'maxDepth' => $maxDepth,
+                    'maxHeight' => $maxHeight,
                     'price' => $price
                 ]
             );

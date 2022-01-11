@@ -27,32 +27,22 @@ class ProductRepository extends ServiceEntityRepository
 
         $service = new HandleProductRepositoryInterface();
 
-        $criteriaWidth = $service->getDimensionCriteria($parameters['criteriaWidth']);
-        $criteriaDepth = $service->getDimensionCriteria($parameters['criteriaDepth']);
-        $criteriaHeight = $service->getDimensionCriteria($parameters['criteriaHeight']);
-
         if ($parameters['category']) {
             $category = $parameters['category'];
             $query->andWhere('p.category = :category')
                 ->setParameter('category', $category);
         }
 
-        if ($parameters['height']) {
-            $height = $parameters['height'];
-            $query->andWhere('p.height ' . $criteriaHeight . '= :height')
-                ->setParameter('height', $height);
+        if ($parameters['minHeight'] || $parameters['maxHeight']) {
+            $service->setSubQuery($query, 'p.height', $parameters['minHeight'], $parameters['maxHeight']);
         }
 
-        if ($parameters['width']) {
-            $width = $parameters['width'];
-            $query->andWhere('p.width ' . $criteriaWidth . '= :width')
-                ->setParameter('width', $width);
+        if ($parameters['minWidth'] || $parameters['maxWidth']) {
+            $service->setSubQuery($query, 'p.width', $parameters['minWidth'], $parameters['maxWidth']);
         }
 
-        if ($parameters['depth']) {
-            $depth = $parameters['depth'];
-            $query->andWhere('p.depth ' . $criteriaDepth . '= :depth')
-                ->setParameter('depth', $depth);
+        if ($parameters['minDepth'] || $parameters['maxDepth']) {
+            $service->setSubQuery($query, 'p.depth', $parameters['minDepth'], $parameters['maxDepth']);
         }
 
         if ($parameters['price']) {
