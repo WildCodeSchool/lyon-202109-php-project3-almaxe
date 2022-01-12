@@ -150,30 +150,31 @@ class MaisonDuMondeCrawlerManager
         }
 
         try {
-            // get product's url
+            // Get product's url
             $product['uri'] = $productCrawler->getUri();
 
-            // get image
+            // Get image
             $images = $productCrawler->filter('.square-image')->images();
             $product['image'] = $this->getImageUri($images);
 
-            //get product's name
+            // Get product's name
             $product['name'] = $productCrawler->filter('.product-title')->html();
 
-            //get product's price
-            // TODO : get rid of spaces on price
+            // Get product's price
             $price = $productCrawler->filter('.base-price')->html();
-            $product['price'] = floatval(str_replace([' ', ','], ['', '.'], substr($price, 0, -2)));
+            // Clean price
+            $price = floatval(preg_replace("/[^0-9]/", "", $price)) / 100;
+            $product['price'] = $price;
 
-            //get dimensions node
+            // Get dimensions node
             $productDimension = $productCrawler->filter('[data-v-887dabba]')->html();
 
-            // clean data
+            // Clean data
             $productDimension =  explode('<span data-v-887dabba>H', $productDimension)[1];
             $productDimension = explode('<', $productDimension)[0];
             $productDimension = explode(' ', $productDimension);
 
-            // store data
+            // Store data
             $product['height'] = $productDimension[0];
             $product['width'] = substr($productDimension[2], 1);
             $product['depth'] = substr($productDimension[4], 2);
