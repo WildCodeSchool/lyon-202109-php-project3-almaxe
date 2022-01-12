@@ -3,14 +3,20 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use Doctrine\ORM\Mapping\Builder\ManyToManyAssociationBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -32,29 +38,41 @@ class ProductCrudController extends AbstractCrudController
             ->remove(Crud::PAGE_INDEX, Action::NEW);
     }
 
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('name')
+            ->add('category');
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
+            FormField::addPanel('Produit'),
             TextField::new('name', 'Nom du produit :'),
             ImageField::new('picture', 'Logo :')
                 ->setBasePath('public/build/images/product/')
                 ->setUploadDir('public/build/images/product/')
                 ->setRequired(false),
-            TextField::new('picture', 'Logo :')
+            UrlField::new('picture', 'Logo :')
                 ->onlyOnForms(),
-            TextField::new('url', 'Lien vers le produit : ')
+            UrlField::new('url', 'Lien vers le produit : ')
                 ->onlyOnForms(),
-            IntegerField::new('price', 'Prix :')
-                ->setRequired(true),
             TextField::new('priceCurrency', 'Devise'),
+            NumberField::new('price', 'Prix :')
+                ->setRequired(true),
             IntegerField::new('height', 'Hauteur :'),
             IntegerField::new('width', 'Largeur :'),
             IntegerField::new('depth', 'Profondeur :'),
             SlugField::new('slug')
                 ->setTargetFieldName('name')
                 ->onlyOnForms(),
-            TextField::new('category.name', 'Categorie'),
-            TextField::new('partner.name', 'Partenaire'),
+            FormField::addPanel('Catégorie'),
+            AssociationField::new('category', 'Catégorie du produit :'),
+            FormField::addPanel('Partenaire'),
+            AssociationField::new('partner', 'Nom du partenaire :')
+                ->setDisabled(true),
+
         ];
     }
 }
