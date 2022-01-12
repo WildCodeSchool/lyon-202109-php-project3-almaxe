@@ -72,7 +72,7 @@ class AlineaCrawlerManager
     public function getProductCount(string $url): int
     {
         $crawler = $this->browser->request('GET', $url);
-        $productCount = $crawler->filter('.nb-results')->html();
+        $productCount = $crawler->filter('.pagination-item')->html();
         $productCount = explode(' ', $productCount)[0];
         return intval($productCount);
     }
@@ -106,9 +106,9 @@ class AlineaCrawlerManager
             $product->setPartner($partner);
             $product->setSlug($this->slugify->generate($product->getName()));
 
-            $this->manager->persist($product);
+            $this->entityManager->persist($product);
         }
-        $this->manager->flush();
+        $this->entityManager->flush();
     }
 
     public function getProductData(Link $link): array
@@ -119,7 +119,6 @@ class AlineaCrawlerManager
             $productCrawler = $this->browser->click($link);
         } catch (Exception $exception) {
             var_dump($exception);
-            die();
             return [];
         }
 

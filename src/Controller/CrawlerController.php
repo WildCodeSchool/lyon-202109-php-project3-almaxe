@@ -16,7 +16,7 @@ class CrawlerController extends AbstractController
     {
         $crawler->main();
         return $this->render('crawler/index.html.twig', [
-            'controller_name' => 'CrawlerController',
+            'crawler' => $crawler,
         ]);
     }
 }
