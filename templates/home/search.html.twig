@@ -3,10 +3,12 @@
 {% block title %}Product search
 {% endblock %}
 
-{% block body %}
+{% block header %}
 	{% include "home/_searchBar.html.twig" %}
+{% endblock %}
 
-	<div class="max-w-screen-xl mx-auto my-8 py-8 px-4 sm:px-6 sm:relative sm:bottom-20 bg-white lg:mx-auto lg:px-24 lg:rounded-lg">
+{% block body %}
+	<div class="max-w-screen-xl mx-auto my-8 py-8 px-4 sm:px-6 sm:relative sm:bottom-12 bg-white lg:mx-auto lg:px-24 lg:rounded-lg">
 		{% if products is defined and products is not empty %}
 			<div class="mb-4 my-2 text-3xl bold">
 				<h2 class="text-3xl bold">Résultats:</h2>
