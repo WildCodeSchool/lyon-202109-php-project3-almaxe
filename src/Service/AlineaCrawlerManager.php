@@ -15,8 +15,8 @@ use Symfony\Component\HttpClient\HttpClient;
 
 class AlineaCrawlerManager
 {
-    private const ARTICLE_PER_PAGE = 35;
-    private const URI = "https://www.alinea.com/fr-fr/";
+    private const ARTICLE_PER_PAGE = 30;
+    private const URI = "https://www.home24.fr";
     private HttpBrowser $browser;
     private EntityManagerInterface $entityManager;
     private PartnerRepository $partnerRepository;
@@ -25,11 +25,12 @@ class AlineaCrawlerManager
     private Slugify $slugify;
 
     private array $links = [
-        'canapé' => self::URI . 'canapes/?page=',
-        'fauteuil' => self::URI . 'fauteuils/?page=',
-        'table' => self::URI . 'tables-fixes/?page=',
-        'bureau' => self::URI . 'bureaux/?page=',
-        'étagère' => self::URI . 'bibliotheques-etageres/?page=',
+        'table' => self::URI . '/tables-salle-manger/?page=',
+        'bureau' => self::URI . '/bureaux/?page=',
+        'étagère' => self::URI . '/etagere/?page=',
+        'fauteuil' => self::URI . '/tous-fauteuils/?page=',
+        'canapé' => self::URI . '/canape/?page='
+
     ];
 
     public function __construct(
@@ -43,7 +44,7 @@ class AlineaCrawlerManager
         $this->partnerRepository = $partnerRepository;
         $this->slugify = $slugify;
         $this->categoryRepository = $categoryRepository;
-        $this->partner = $this->partnerRepository->findOneBy(['name' => 'Ikea']);
+        $this->partner = $this->partnerRepository->findOneBy(['name' => 'Home24']);
         if (is_null($this->partner)) {
             throw new Exception("No partner found");
         }
@@ -72,22 +73,24 @@ class AlineaCrawlerManager
     public function getProductCount(string $url): int
     {
         $crawler = $this->browser->request('GET', $url);
-        $productCount = $crawler->filter('.pagination-item')->html();
+        $productCount = $crawler->filter('.css-mos0wc')->html();
         $productCount = explode(' ', $productCount)[0];
+        $productCount = substr($productCount, 1);
         return intval($productCount);
     }
 
     public function getProducts(Category $category, string $url): void
     {
-        $crawler = $this->browse->request('GET', $url);
-        $links = $crawler->filter('.name-link')->links();
+        $crawler = $this->browser->request('GET', $url);
+        $links = $crawler->filter('.css-xl0ay8')->links();
 
         foreach ($links as $link) {
             $data = $this->getProductData($link);
             if (empty($data)) {
                 continue;
             }
-
+            // $productCrawler = $this->browser->click($link);
+            // $data['image'] = $productCrawler->filter('.css-13fgnt6')->html();
             $product = new Product();
             $product->setName($data['name']);
             $product->setPrice($data['price']);
@@ -117,34 +120,40 @@ class AlineaCrawlerManager
 
         try {
             $productCrawler = $this->browser->click($link);
+            //URI
+            $product['uri'] = $productCrawler->getUri();
+
+            //Image
+            $product['image'] = "favicon.png";
+
+            //Price
+            $productPrice = $productCrawler->filter('.css-2hheeo')->html();
+            $productPrice = explode(' ', $productPrice);
+            $product['price'] = intval($productPrice[0]);
+
+            //Name
+            $productName = $productCrawler->filter('.css-1jyj9ij')->html();
+            $product['name'] = $productName;
+
+            //Dimensions
+            $productDimension = $productCrawler->filter('.css-59yddc')->html();
+            $productDimension = explode("</ul>", $productDimension);
+            $productDimension = explode('</li>', $productDimension[2]);
+
+            //Clean
+            $height = explode(" ", $productDimension[3]);
+            $width = explode(" ", $productDimension[2]);
+            $depth = explode(' ', $productDimension[4]);
+
+            //Get data
+            $product['height'] = intval($height[4]);
+            $product['width'] = intval($width[4]);
+            $product['depth'] = intval($depth[4]);
+
+            return $product;
         } catch (Exception $exception) {
             var_dump($exception);
             return [];
         }
-
-        $product['uri'] = $productCrawler->getUri();
-        $product['image'] = "favicon.png";
-        $product['price'] = 3;
-
-        //Name
-        $productName = $productCrawler->filter('.product-name-title')->html();
-        $productName = explode(' ', $productName);
-        $product['name'] = $productName[3];
-
-        //Dimensions
-        $productDimension = $productCrawler->filter('.bloc-txt dimension')->html();
-
-        //Clean
-        $productDimension = explode('<li>', $productDimension);
-        $height = explode(' ', $productDimension[1]);
-        $width = explode(' ', $productDimension[2]);
-        $depth = explode(' ', $productDimension[3]);
-
-        //Get data
-        $product['height'] = $height[3];
-        $product['width'] = $width[3];
-        $product['depth'] = $depth[3];
-
-        return $product;
     }
 }

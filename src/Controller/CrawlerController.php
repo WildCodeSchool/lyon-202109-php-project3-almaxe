@@ -15,8 +15,6 @@ class CrawlerController extends AbstractController
     public function index(AlineaCrawlerManager $crawler): Response
     {
         $crawler->main();
-        return $this->render('crawler/index.html.twig', [
-            'crawler' => $crawler,
-        ]);
+        return $this->render('crawler/index.html.twig', []);
     }
 }
