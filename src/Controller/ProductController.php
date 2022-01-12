@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
+use Exception;
 use App\Entity\Product;
+use App\Entity\Category;
+use App\Service\Slugify;
 use App\Form\ProductType;
 use App\Form\SearchProductType;
 use App\Repository\ProductRepository;
-use App\Service\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
 {
@@ -52,12 +54,32 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="product_show", methods={"GET"})
+     * @Route("/{slug}", name="product_show", methods={"GET", "POST"})
      */
-    public function show(Product $product): Response
+    public function show(Product $product, Request $request): Response
     {
+        $form = $this->createForm(SearchProductType::class);
+
+        $search = $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category = $search->get('category')->getData();
+            if (!$category instanceof Category) {
+                throw new Exception('Category not found');
+            }
+
+            return $this->redirectToRoute(
+                'product_search',
+                [
+                    'request' => $request
+                ],
+                307
+            );
+        }
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            'form' => $form->createView()
         ]);
     }
 
@@ -75,7 +97,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('product_show', ['slug' => $product->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/edit.html.twig', [

@@ -1,55 +1,69 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
+	{{ parent() }}
+	-
 	{{ product.name }}
+{% endblock %}
+
+{% block header %}
+	{% include "home/_searchBar.html.twig" %}
 {% endblock %}
 
 {% block body %}
 
-	<div class="bg-white">
-		<div
-			class="pt-6">
+	<div class="max-w-screen-xl mx-auto my-8 py-8 px-10 sm:px-12 sm:relative sm:bottom-4 bg-white lg:mx-auto lg:px-24 lg:rounded-lg">
+		<div class="product_container mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
+			<div class="w-11/12 mx-auto overflow-hidden rounded-md overflow-hidden">
+				<img src="{{ product.picture }}" alt="{{ product.name }}" class="object-cover">
+			</div>
+			<div class="lg:mx-5">
+				<h1 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl mt-6 lg:mt-0">{{ product.name }}</h1>
+				<h2 class="text-sm font-medium text-gray-900 mt-4">Caractéristiques:</h2>
 
-			<!-- Image gallery -->
-			<div class="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
-				<div class="rounded-lg overflow-hidden lg:block">
-					<img src="{{ product.picture }}" alt="Bureau {{ product.name }}" class="w-full h-full object-center object-contain">
-				</div>
-				<div class="m-10">
-					<h1 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{{ product.name }}</h1>
-					<h2 class="text-sm font-medium text-gray-900">Caractéristiques</h3>
-
-					<div class="mt-4">
-						<ul role="list" class="pl-4 list-disc text-sm space-y-2">
-							<li class="text-gray-400">
-								<span class="text-gray-600">Longueur :
-									{{ product.width }}cm</span>
-							</li>
-							<li class="text-gray-400">
-								<span class="text-gray-600">Hauteur :
-									{{ product.height }}cm</span>
-							</li>
-							<li class="text-gray-400">
-								<span class="text-gray-600">Profondeur :
-									{{ product.depth }}cm</span>
-							</li>
-						</ul>
-					</div>
-					<div class="mt-4">
-						<h3>
-							Prix : {{ product.price }} &euro;
-						</h3>
-					</div>
-				</div>
-				<div class="m-5 w-10/12 justify-center">
-					<a href="{{ path('product_index') }}" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Revenir à la liste des produits</a>
-					<a href="{{ product.url }}" target="_blank" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Voir chez le partenaire</a>
-					{% if is_granted("ROLE_ADMIN") %}
-						<a href="{{ path('product_edit', {'id': product.id}) }}" class="mt-10 bg-orange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Modifier le produit</a>
-						<div class="w-10/12">
-							{{ include('product/_delete_form.html.twig') }}
-						</div>
-					{% endif %}
+				<ul role="list" class="mt-2 ml-2 pl-2 list-disc text-sm space-y-1">
+					<li class="text-gray-400">
+						<span class="text-gray-600">Longueur :
+							{{ product.width }}
+							cm</span>
+					</li>
+					<li class="text-gray-400">
+						<span class="text-gray-600">Hauteur :
+							{{ product.height }}
+							cm</span>
+					</li>
+					<li class="text-gray-400">
+						<span class="text-gray-600">Profondeur :
+							{{ product.depth }}
+							cm</span>
+					</li>
+				</ul>
+				<div class="mt-4">
+					<h3 class="font-bold">
+						Prix :
+						{{ product.price|number_format(2) }}
+						&euro;
+					</h3>
 				</div>
 			</div>
-		{% endblock %}
+			<div class="lg:mx-5 flex flex-col">
+				<div class="flex flex-col-reverse lg:flex-col">
+					<a href="{{ path('product_search') }}" class="bg-orange border border-transparent rounded-md py-2 px-6 flex items-center justify-center text-base font-medium text-white hover:bg-black-light mt-8 lg:mt-0">Revenir à la liste des produits</a>
+
+					<div class="mt-8">
+						<p>Voir chez le partenaire:</p>
+						<a href="{{ product.url }}" target="_blank" class="block w-24 mt-2">
+							<img src="{{ product.partner.picture }}" alt="" class="object-cover">
+						</a>
+					</div>
+				</div>
+				{% if is_granted("ROLE_ADMIN") %}
+					<a href="{{ path('product_edit', {'id': product.id}) }}" class="mt-10 bg-blue-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Modifier le produit</a>
+
+					{{ include('product/_delete_form.html.twig') }}
+				{% endif %}
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
