@@ -89,10 +89,10 @@ class AlineaCrawlerManager
             if (empty($data)) {
                 continue;
             }
-            $productCrawler = $this->browser->click($link);
-            $images = $productCrawler->filter('.css-13fgnt6')->images();
-            $product['image'] = $this->getImageUri($images);
+            // $productCrawler = $this->browser->click($link);
+            // $images = $productCrawler->filter('.css-13fgnt6')->images();
             $product = new Product();
+            // $data['image'] = $this->getImageUri($images);
             $product->setName($data['name']);
             $product->setPrice($data['price']);
             $product->setPriceCurrency('€');
@@ -142,8 +142,8 @@ class AlineaCrawlerManager
             $productDimension = explode('</li>', $productDimension[2]);
 
             //Clean
-            $height = explode(" ", $productDimension[3]);
-            $width = explode(" ", $productDimension[2]);
+            $height = explode(" ", $productDimension[2]);
+            $width = explode(" ", $productDimension[3]);
             $depth = explode(' ', $productDimension[4]);
 
             //Get data
@@ -153,8 +153,18 @@ class AlineaCrawlerManager
 
             return $product;
         } catch (Exception $exception) {
-            var_dump($exception);
             return [];
         }
     }
+    // public function getImageUri(array $images): string
+    // {
+    //     $uri = '';
+    //     foreach ($images as $img) {
+    //         if (strlen($uri) < strlen($img->getUri())) {
+    //             $uri = $img->getUri();
+    //         }
+    //     }
+
+    //     return $uri;
+    // }
 }
