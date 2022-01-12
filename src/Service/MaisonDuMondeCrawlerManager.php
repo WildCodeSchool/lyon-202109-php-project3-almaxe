@@ -89,9 +89,14 @@ class MaisonDuMondeCrawlerManager
     public function getProducts(Category $category, string $url): void
     {
         echo ("Request category page \n");
+
+        // Get main page containing the products
         $crawler = $this->browser->request('GET', $url);
+
         echo ("Get products links \n");
         echo ("\n============\n\n");
+
+        // Get all Link objects corresponding to each product
         $links = $crawler->filter('.link')->links();
 
         foreach ($links as $link) {
