@@ -89,8 +89,9 @@ class AlineaCrawlerManager
             if (empty($data)) {
                 continue;
             }
-            // $productCrawler = $this->browser->click($link);
-            // $data['image'] = $productCrawler->filter('.css-13fgnt6')->html();
+            $productCrawler = $this->browser->click($link);
+            $images = $productCrawler->filter('.css-13fgnt6')->images();
+            $product['image'] = $this->getImageUri($images);
             $product = new Product();
             $product->setName($data['name']);
             $product->setPrice($data['price']);
