@@ -7,7 +7,6 @@ use App\Entity\Product;
 use App\Entity\Partner;
 use App\Repository\CategoryRepository;
 use App\Repository\PartnerRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\BrowserKit\HttpBrowser;
@@ -55,8 +54,13 @@ class MaisonDuMondeCrawlerManager
         foreach ($this->links as $categoryName => $link) {
             // Get number of product for the current category
             $numberOfProduct = $this->getProductCount($link);
+
             //Determine number of page we need to browse
             $numberOfPage = ceil($numberOfProduct / self::ARTICLE_PER_PAGE);
+
+            echo ("$numberOfProduct products found for category '$categoryName'\n");
+            echo ("$numberOfPage pages to scrap \n");
+            echo ("\n============\n\n");
 
             $category = $this->categoryRepository->findOneBy(['name' => $categoryName]);
             if (is_null($category)) {
@@ -65,6 +69,7 @@ class MaisonDuMondeCrawlerManager
 
             for ($i = 1; $i <= $numberOfPage; $i++) {
                 try {
+                    echo ("Start scapping on page $i/$numberOfPage \n");
                     $this->getProducts($category, $link . $i);
                 } catch (Exception $exception) {
                     continue;
@@ -83,8 +88,10 @@ class MaisonDuMondeCrawlerManager
 
     public function getProducts(Category $category, string $url): void
     {
+        echo ("Request category page \n");
         $crawler = $this->browser->request('GET', $url);
-
+        echo ("Get products links \n");
+        echo ("\n============\n\n");
         $links = $crawler->filter('.link')->links();
 
         foreach ($links as $link) {
@@ -114,8 +121,14 @@ class MaisonDuMondeCrawlerManager
             $product->setSlug($this->slugify->generate($product->getName()));
 
             $this->manager->persist($product);
+            echo ("Product created\n");
         }
+        echo ("Flush data \n");
+        echo ("\n============\n\n");
         $this->manager->flush();
+
+        // Create new client
+        $this->browser = new HttpBrowser(HttpClient::create());
     }
 
     public function getProductData(Link $link): array
@@ -124,8 +137,10 @@ class MaisonDuMondeCrawlerManager
 
         // get Product's page
         try {
+            echo ("Connection to url '" . $link->getUri() . "' ... \n");
             $productCrawler = $this->browser->click($link);
         } catch (Exception $exception) {
+            echo ("Connection failed \n");
             return [];
         }
 
@@ -157,7 +172,9 @@ class MaisonDuMondeCrawlerManager
             $product['height'] = $productDimension[0];
             $product['width'] = substr($productDimension[2], 1);
             $product['depth'] = substr($productDimension[4], 2);
+            echo ("Product's data retrieved \n");
         } catch (Exception $exception) {
+            echo ("Error : Informations incomplete or unreadable. \n");
             return [];
         }
         return $product;
