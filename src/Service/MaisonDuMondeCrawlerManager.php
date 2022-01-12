@@ -7,6 +7,7 @@ use App\Entity\Product;
 use App\Entity\Partner;
 use App\Repository\CategoryRepository;
 use App\Repository\PartnerRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\BrowserKit\HttpBrowser;
@@ -66,7 +67,7 @@ class MaisonDuMondeCrawlerManager
                 try {
                     $this->getProducts($category, $link . $i);
                 } catch (Exception $exception) {
-                    var_dump($exception);
+                    continue;
                 }
             }
         }
@@ -125,38 +126,40 @@ class MaisonDuMondeCrawlerManager
         try {
             $productCrawler = $this->browser->click($link);
         } catch (Exception $exception) {
-            var_dump($exception);
             return [];
         }
 
-        // get product's url
-        $product['uri'] = $productCrawler->getUri();
+        try {
+            // get product's url
+            $product['uri'] = $productCrawler->getUri();
 
-        // get image
-        $images = $productCrawler->filter('.square-image')->images();
-        $product['image'] = $this->getImageUri($images);
+            // get image
+            $images = $productCrawler->filter('.square-image')->images();
+            $product['image'] = $this->getImageUri($images);
 
-        //get product's name
-        $product['name'] = $productCrawler->filter('.product-title')->html();
+            //get product's name
+            $product['name'] = $productCrawler->filter('.product-title')->html();
 
-        //get product's price
-        // TODO : get rid of spaces on price
-        $price = $productCrawler->filter('.base-price')->html();
-        $product['price'] = floatval(substr($price, 0, -2));
+            //get product's price
+            // TODO : get rid of spaces on price
+            $price = $productCrawler->filter('.base-price')->html();
+            $product['price'] = floatval(str_replace([' ', ','], ['', '.'], substr($price, 0, -2)));
 
-        //get dimensions node
-        $productDimension = $productCrawler->filter('[data-v-887dabba]')->html();
+            //get dimensions node
+            $productDimension = $productCrawler->filter('[data-v-887dabba]')->html();
 
-        // clean data
-        $productDimension =  explode('<span data-v-887dabba>H', $productDimension)[1];
-        $productDimension = explode('<', $productDimension)[0];
-        $productDimension = explode(' ', $productDimension);
+            // clean data
+            $productDimension =  explode('<span data-v-887dabba>H', $productDimension)[1];
+            $productDimension = explode('<', $productDimension)[0];
+            $productDimension = explode(' ', $productDimension);
 
-        // store data
-        $product['height'] = $productDimension[0];
-        $product['width'] = substr($productDimension[2], 1);
-        $product['depth'] = substr($productDimension[4], 2);
-
+            // store data
+            $product['height'] = $productDimension[0];
+            $product['width'] = substr($productDimension[2], 1);
+            $product['depth'] = substr($productDimension[4], 2);
+        } catch (Exception $exception) {
+            return [];
+        }
         return $product;
     }
 
