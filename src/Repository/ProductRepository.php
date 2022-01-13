@@ -27,6 +27,8 @@ class ProductRepository extends ServiceEntityRepository
 
         $service = new HandleProductRepositoryInterface();
 
+
+
         if ($parameters['category']) {
             $category = $parameters['category'];
             $query->andWhere('p.category = :category')
@@ -50,6 +52,8 @@ class ProductRepository extends ServiceEntityRepository
             $query->andWhere('p.price <= :price')
                 ->setParameter('price', $price);
         }
+
+        $service->addOrder($query, $parameters);
 
         return (array) $query->getQuery()->getResult();
     }
