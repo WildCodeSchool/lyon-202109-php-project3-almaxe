@@ -23,6 +23,9 @@
     "amphp/sync": {
         "version": "v1.4.0"
     },
+    "beberlei/doctrineextensions": {
+        "version": "v1.3.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },

@@ -6,7 +6,6 @@ use Exception;
 use App\Entity\Category;
 use App\Form\SearchProductType;
 use App\Repository\ProductRepository;
-use App\Service\SearchManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,13 +47,12 @@ class HomeController extends AbstractController
      */
     public function searchFromProductPage(
         Request $request,
-        ProductRepository $productRepository,
-        SearchManager $searchManager
+        ProductRepository $productRepository
     ): Response {
         $form = $this->createForm(SearchProductType::class);
 
         $search = $form->handleRequest($request);
-        $productsSorted = [];
+        $products = [];
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $search->get('category')->getData();
@@ -78,12 +76,11 @@ class HomeController extends AbstractController
             ];
 
             $products = $productRepository->searchProduct($searchParameters);
-            $productsSorted = $searchManager->sortProducts($products, $searchParameters);
         }
 
         return $this->render('home/search.html.twig', [
             'form' => $form->createView(),
-            'products' => $productsSorted,
+            'products' => $products,
         ]);
     }
 }
