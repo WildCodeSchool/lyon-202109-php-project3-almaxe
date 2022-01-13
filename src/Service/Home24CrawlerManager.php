@@ -146,7 +146,6 @@ class Home24CrawlerManager
 
             //Dimensions
             $productDimension = $productCrawler->filter('.css-59yddc')->html();
-            // $productDimension = explode('</li>', $productDimension[2]);
             $height = explode("Hauteur : ", $productDimension)[1];
             $height = explode(" ", $height)[0];
             $width = explode("Largeur : ", $productDimension)[1];
