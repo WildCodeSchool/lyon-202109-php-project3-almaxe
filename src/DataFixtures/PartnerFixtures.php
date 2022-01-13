@@ -2,9 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Blacklist;
 use App\Entity\Partner;
-use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -17,7 +15,7 @@ class PartnerFixtures extends Fixture
         'Conforama',
         'Meubles.fr',
         'Leroy Merlin',
-        'Made',
+        'Home24',
     ];
 
     public const AFFILIATE_KEY = [
@@ -27,7 +25,7 @@ class PartnerFixtures extends Fixture
         'Affiliate Key Conforama',
         'Affiliate Key Meubles.fr',
         'Affiliate Key Leroy Merlin',
-        'Affiliate Key Made',
+        'Affiliate Key Home24',
     ];
 
     public const ACTIVE = [
@@ -48,7 +46,7 @@ class PartnerFixtures extends Fixture
         'https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/1f/e4/4f/1fe44fc4-4c31-' .
             '2331-26de-02e9866f43c0/source/256x256bb.jpg',
         'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Leroy_Merlin.svg/1200px-Leroy_Merlin.svg.png',
-        'https://medias.oas.io/medias/2019/09/03/21/made-com-o.png',
+        ''
     ];
 
     public function load(ObjectManager $manager)
