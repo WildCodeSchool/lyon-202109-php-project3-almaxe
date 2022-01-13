@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
-use App\Service\ProductRepositoryManager;
+use App\Service\HandleProductRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -25,11 +25,7 @@ class ProductRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('p');
 
-        $service = new ProductRepositoryManager();
-
-        $criteriaWidth = $service->getDimensionCriteria($parameters['criteriaWidth']);
-        $criteriaDepth = $service->getDimensionCriteria($parameters['criteriaDepth']);
-        $criteriaHeight = $service->getDimensionCriteria($parameters['criteriaHeight']);
+        $service = new HandleProductRepositoryInterface();
 
         if ($parameters['category']) {
             $category = $parameters['category'];
@@ -37,22 +33,16 @@ class ProductRepository extends ServiceEntityRepository
                 ->setParameter('category', $category);
         }
 
-        if ($parameters['height']) {
-            $height = $parameters['height'];
-            $query->andWhere('p.height ' . $criteriaHeight . '= :height')
-                ->setParameter('height', $height);
+        if ($parameters['minHeight'] || $parameters['maxHeight']) {
+            $service->setSubQuery($query, 'p.height', $parameters['minHeight'], $parameters['maxHeight']);
         }
 
-        if ($parameters['width']) {
-            $width = $parameters['width'];
-            $query->andWhere('p.width ' . $criteriaWidth . '= :width')
-                ->setParameter('width', $width);
+        if ($parameters['minWidth'] || $parameters['maxWidth']) {
+            $service->setSubQuery($query, 'p.width', $parameters['minWidth'], $parameters['maxWidth']);
         }
 
-        if ($parameters['depth']) {
-            $depth = $parameters['depth'];
-            $query->andWhere('p.depth ' . $criteriaDepth . '= :depth')
-                ->setParameter('depth', $depth);
+        if ($parameters['minDepth'] || $parameters['maxDepth']) {
+            $service->setSubQuery($query, 'p.depth', $parameters['minDepth'], $parameters['maxDepth']);
         }
 
         if ($parameters['price']) {
