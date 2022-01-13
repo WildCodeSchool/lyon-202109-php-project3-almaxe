@@ -82,7 +82,7 @@ class Product
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $asin;
+    private ?string $asin;
 
     public function getId(): ?int
     {
