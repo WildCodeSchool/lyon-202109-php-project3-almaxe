@@ -79,6 +79,11 @@ class Product
      */
     private ?Category $category;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $asin;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -224,6 +229,18 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getAsin(): ?string
+    {
+        return $this->asin;
+    }
+
+    public function setAsin(?string $asin): self
+    {
+        $this->asin = $asin;
 
         return $this;
     }
