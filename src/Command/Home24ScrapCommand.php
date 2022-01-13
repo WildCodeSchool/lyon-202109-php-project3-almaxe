@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Home24ScrapCommand extends Command
 {
-    protected static $defaultName = 'app:git scrap-home';
+    protected static $defaultName = 'app:scrap-home';
     protected Home24CrawlerManager $home24Crawler;
 
     public function __construct(Home24CrawlerManager $home24Crawler)
