@@ -10,3 +10,19 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+
+const toggleSearchButton = document.getElementById('toggleSearch');
+const toggleSearchIcon = document.getElementById('toggleSearchIcon');
+const searchField = document.getElementById('searchField');
+
+function handleToggleClick(e) {
+    e.preventDefault();
+    searchField.classList.toggle('hidden');
+    if (searchField.classList.contains('hidden')) {
+        toggleSearchIcon.innerHTML = '&dtrif;';
+    } else {
+        toggleSearchIcon.innerHTML = '&utrif;';
+    }
+}
+
+toggleSearchButton.addEventListener('click', handleToggleClick);

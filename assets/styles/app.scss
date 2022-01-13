@@ -4,9 +4,13 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-*{
+* {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
-    font-family: 'Modern No. 20', sans-serif;
+    font-family: sans-serif;
+}
+
+.product_container {
+    align-self: stretch;
 }

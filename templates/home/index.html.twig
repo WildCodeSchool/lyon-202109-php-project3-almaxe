@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}
 	{{ parent() }}
-	- Home
+	- Accueil
 {% endblock %}
 {% block stylesheets %}
 	{{ parent() }}
@@ -9,6 +9,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 {% endblock %}
 {% block body %}
-	{% include "home/_searchBar.html.twig" %}
+	<h1 class="text-center text-2xl sm:text-4xl mb-6">Recherche de meubles<br>par dimensions</h1>
+	{% include "home/_searchForm.html.twig" %}
 {% endblock
 %}
