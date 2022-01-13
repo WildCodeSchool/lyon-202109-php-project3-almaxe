@@ -46,19 +46,16 @@
 					</h3>
 				</div>
 			</div>
-			<div class="lg:mx-5 flex flex-col">
-				<div class="flex flex-col-reverse lg:flex-col">
-					<button onclick="window.history.go(-1); return false;" class="bg-orange border border-transparent rounded-md py-2 px-6 flex items-center justify-center text-base font-medium text-white hover:bg-black-light mt-8 lg:mt-0">Revenir à la liste des produits</button>
-
-					<div class="mt-8">
-						<p>Voir chez le partenaire:</p>
-						<a href="{{ product.url }}" target="_blank" class="block w-24 mt-2">
-							<img src="{{ product.partner.picture }}" alt="" class="object-cover">
-						</a>
-					</div>
+			<div class="lg:mx-5">
+				<div class="mb-8 mt-8 lg:mt-0">
+					<p>Voir chez le partenaire:</p>
+					<a href="{{ product.url }}" target="_blank" class="bg-orange border border-transparent rounded-md py-2 px-6 flex items-center justify-center text-base font-medium text-white hover:bg-black-light mt-3">
+						<img src="{{ product.partner.picture }}" alt="" class="object-cover h-12">
+					</a>
 				</div>
+				<button onclick="window.history.go(-1); return false;" class="bg-orange border border-transparent rounded-md py-2 px-6 flex items-center justify-center text-base font-medium text-white hover:bg-black-light w-full">Revenir à la liste des produits</button>
 				{% if is_granted("ROLE_ADMIN") %}
-					<a href="{{ path('product_edit', {'id': product.id}) }}" class="mt-10 bg-blue-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light">Modifier le produit</a>
+					<a href="{{ path('product_edit', {'id': product.id}) }}" class="mt-10 bg-blue-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light w-full">Modifier le produit</a>
 
 					{{ include('product/_delete_form.html.twig') }}
 				{% endif %}
