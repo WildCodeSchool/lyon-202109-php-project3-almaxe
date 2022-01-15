@@ -38,7 +38,7 @@ class FromAmazon
         $this->categoryRepository = $categoryRepository;
         $this->entityManager = $entityManager;
         $this->slugify = $slugify;
-        $this->nbOfProduct = 4;
+        $this->nbOfProduct = 30;
         $this->parameterBag = $parameterBag;
     }
 

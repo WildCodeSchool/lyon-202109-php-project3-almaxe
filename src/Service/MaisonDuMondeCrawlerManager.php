@@ -29,7 +29,7 @@ class MaisonDuMondeCrawlerManager
         'fauteuil' => self::URI . 'fauteuils-poufs-et-repose-pieds-ncc34bdf43910454d7efcf6df9b845f014c3540f?page=',
         'table' => self::URI . 'tables-a-diner-22483ed22fab4cdf82dae2057687c73a?page=',
         'bureau' => self::URI . 'bureaux-et-meubles-secretaires-3ecf71c8798d34e8c3d78d47e0313270?page=',
-        'étagère' => self::URI . 'etageres-d1281f70e11032066ad0cb5e24e5a4f2?page='
+        'étagère' => self::URI . 'etageres-d1281f70e11032066ad0cb5e24e5a4f2?page=',
     ];
 
     public function __construct(
@@ -53,7 +53,7 @@ class MaisonDuMondeCrawlerManager
     {
         foreach ($this->links as $categoryName => $link) {
             // Get number of product for the current category
-            $numberOfProduct = $this->getProductCount($link);
+            $numberOfProduct = $this->getProductCount($link . 1);
 
             //Determine number of page we need to browse
             $numberOfPage = ceil($numberOfProduct / self::ARTICLE_PER_PAGE);
