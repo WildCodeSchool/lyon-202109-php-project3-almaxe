@@ -20,7 +20,7 @@ class FromAmazon
     private Slugify $slugify;
     private const KEYWORDS = [
         'Bureau',
-        'Table',
+        //'Table',
         // 'Etagère',
         // 'Fauteuil',
         // 'Canapé'
@@ -103,7 +103,6 @@ class FromAmazon
         }
         echo ("\n==============================================================\n");
         echo ("\n==============================================================\n");
-        echo ("\n==============================================================\n");
         return $products;
     }
 
@@ -147,23 +146,32 @@ class FromAmazon
                 echo ("There are no dimensions for this product \n");
                 continue;
             }
-            $dimensions = $informations['dimensions'];
-            echo ("The dimensions is : $dimensions \n");
-            $height = intval(substr($dimensions, 0, 3));
-            $width = intval(substr($dimensions, 5, 3));
-            $depth = intval(substr($dimensions, 10, 3));
-            $product->setName(strval($informations['title']));
-            $product->setPicture(strval($informations['main_image']['link']));
-            $product->setUrl(strval($informations['link']));
-            $slug = $this->slugify->generate($product->getName());
-            $product->setSlug($slug);
-            $product->setHeight($height);
-            $product->setWidth($width);
-            $product->setDepth($depth);
-            $product->setPartner($this->partnerRepository->findOneBy(['name' => 'Amazon']));
-            $product->setPartnerProductId(uniqid());
-            $this->entityManager->persist($product);
-            $this->entityManager->flush();
+            try {
+                $dimensions = explode('x', $informations['dimensions']);
+                $height = intval(trim($dimensions[0]));
+                $width = intval(trim($dimensions[1]));
+                $depth = intval(trim(explode(' ', $dimensions[2])[1]));
+                echo ("$height \n");
+                echo ("$width \n");
+                echo ("$depth \n");
+                $product->setName(strval($informations['title']));
+                $product->setPicture(strval($informations['main_image']['link']));
+                $product->setUrl(strval($informations['link']));
+                $slug = $this->slugify->generate($product->getName());
+                $product->setSlug($slug);
+                $product->setHeight($height);
+                $product->setWidth($width);
+                $product->setDepth($depth);
+                $product->setPartner($this->partnerRepository->findOneBy(['name' => 'Amazon']));
+                $product->setPartnerProductId(uniqid());
+                $this->entityManager->persist($product);
+                $this->entityManager->flush();
+            } catch (Exception $exception) {
+                echo ("\n==============================================================\n");
+                echo ("Something is missing about a product, continue \n");
+                echo ("\n==============================================================\n");
+                continue;
+            }
         }
     }
 }
