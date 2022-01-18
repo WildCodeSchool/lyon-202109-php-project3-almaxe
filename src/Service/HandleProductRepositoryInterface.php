@@ -24,7 +24,9 @@ class HandleProductRepositoryInterface
     {
         $order = $this->addOrderFields($params);
         if ($order) {
-            $query->orderBy($order, "ASC");
+            $query->orderBy($order, "ASC")
+                ->addOrderBy('p.price', 'ASC')
+                ->addOrderBy('p.name', 'ASC');
         }
     }
 

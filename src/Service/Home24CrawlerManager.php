@@ -105,10 +105,10 @@ class Home24CrawlerManager
             $product->setName($data['name']);
             $product->setPrice($data['price']);
             $product->setPriceCurrency('€');
+            $product->setPicture($data['image']);
             $product->setHeight($data['height']);
             $product->setWidth($data['width']);
             $product->setDepth($data['depth']);
-            $product->setPicture($data['image']);
             $product->setUrl($data['uri']);
             $product->setCategory($category);
             $product->setPartnerProductId(uniqid());
@@ -136,8 +136,8 @@ class Home24CrawlerManager
 
             //Price
             $productPrice = $productCrawler->filter('.css-2hheeo')->html();
-            $productPrice = explode(' ', $productPrice);
-            $product['price'] = floatval($productPrice[0]);
+            $price = floatval(preg_replace("/[^0-9]/", "", $productPrice)) / 100;
+            $product['price'] = floatval($price);
 
             //Name
             $productName = $productCrawler->filter('.css-1jyj9ij')->html();
