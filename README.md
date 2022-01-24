@@ -1,4 +1,4 @@
-# Project 3 - Starter Kit - Symfony 5.*
+# Project 3 - Starter Kit - Symfony 5.3
 
 ## Presentation
 
