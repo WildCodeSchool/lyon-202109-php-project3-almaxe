@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product search
+{% endblock %}
+
+{% block body %}
+	{% include "_searchBar.html.twig" %}
+	{% if products is defined %}
+	{% if admin is defined %}
+	{% endif %}
+		<div class="">
+			<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 2xl:max-w-full">
+				<h2 class="mx-2 my-2">Meubles</h2>
+				<div class="rounded-lg grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 2xl:grid-cols-6 2xl:gap-x-12">
+					{% for product in products %}
+						<div class="block w-11/12 h-11/12 items-center mx-auto my-auto rounded-lg border-2 border-solid border-slate-300">
+							<a href="{{ path('product_show', {'slug': product.slug}) }}">
+								<div class="aspect-w-1 aspect-h-1">
+									<img src="{{ product.picture }}" alt="" class="w-9/12 h-9/12 mx-auto mt-2 object-center  group-hover:opacity-75 rounded-3xl">
+								</div>
+							</a>
+							<div class="ml-2 mt-4 p-2">
+								<div>
+									<i>
+										H :
+										{{ product.height }}
+										L :
+										{{ product.width }}
+										P :
+										{{ product.depth }}
+									</i>
+								</div>
+								<h3 class="mt-4 ml-2 text-sm text-gray-700">
+									{{ product.name }}
+								</h3>
+								<p class="mt-1 ml-2 text-lg font-medium text-gray-900" id="price">
+									{{ product.price }}
+									&#8364;
+								</p>
+								<a href="{{ product.url }}" target="_blank" class="group">Voir chez le partenaire</a>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+<div class="w-full max-w-xl m-10">
+	<div class="bg-white shadow-md rounded p-10">
+		{{ form_start(form) }}
+		<div class="px-4 mb-4">
+			{{ form_row(form.name, {'label': 'Nom du produit : '}) }}
+		</div>
+		<div class="px-4 mb-4">
+			{{ form_row(form.price, {'label': 'Prix du produit : '}) }}
+		</div>
+		<div class="px-4 mb-4">
+			{{ form_row(form.height, {'label': 'Hauteur : '}) }}
+		</div>
+		<div class="px-4 mb-4">
+			{{ form_row(form.width, {'label': 'Longueur : '}) }}
+		</div>
+		<div class="px-4 mb-4">
+			{{ form_row(form.depth, {'label': 'Profondeur : '}) }}
+		</div>
+		<div class="px-4 mb-4">
+			{{ form_row(form.picture, {'label': "URL de l'image : "}) }}
+		</div>
+		<div class="px-4 mb-4">
+			{{ form_row(form.url, {'label': "URL du produit : "}) }}
+		</div>
+		<button class="btn bg-green-400 rounded-md py-2 px-6 w-full">{{ button_label|default('Save') }}</button>
+		{{ form_end(form) }}
+	</div>
+</div>
