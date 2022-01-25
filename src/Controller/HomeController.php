@@ -95,13 +95,13 @@ class HomeController extends AbstractController
 
             $searchParametersPage = [
                 'category' => $searchParamPage['category'],
-                'minWidth' => $searchParamPage['minWidth'],
-                'minDepth' => $searchParamPage['minDepth'],
-                'minHeight' => $searchParamPage['minHeight'],
-                'maxWidth' => $searchParamPage['maxWidth'],
-                'maxDepth' => $searchParamPage['maxDepth'],
-                'maxHeight' => $searchParamPage['maxHeight'],
-                'price' => $searchParamPage['price']
+                'minWidth' => intval($searchParamPage['minWidth']),
+                'minDepth' => intval($searchParamPage['minDepth']),
+                'minHeight' => intval($searchParamPage['minHeight']),
+                'maxWidth' => intval($searchParamPage['maxWidth']),
+                'maxDepth' => intval($searchParamPage['maxDepth']),
+                'maxHeight' => intval($searchParamPage['maxHeight']),
+                'price' => intval($searchParamPage['price'])
             ];
 
             $articles = $productRepository->searchProduct($searchParametersPage);
