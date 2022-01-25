@@ -64,6 +64,9 @@
 		{% else %}
 			<p>Aucun meuble ne correspond à votre recherche</p>
 		{% endif %}
+		<div class="flex justify-center mt-4">
+			{{ knp_pagination_render(products) }}
+		</div>
 	</div>
 
 {% endblock %}

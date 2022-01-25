@@ -6,10 +6,16 @@ use Exception;
 use App\Entity\Category;
 use App\Form\SearchProductType;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Entity;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class HomeController extends AbstractController
 {
@@ -31,14 +37,15 @@ class HomeController extends AbstractController
             return $this->redirectToRoute(
                 'product_search',
                 [
-                    'request' => $request
+                    'request' => $request,
+
                 ],
                 307
             );
         }
 
         return $this->render('home/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -47,12 +54,19 @@ class HomeController extends AbstractController
      */
     public function searchFromProductPage(
         Request $request,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        PaginatorInterface $paginator,
+        Session $session
     ): Response {
         $form = $this->createForm(SearchProductType::class);
 
+        if (!empty($request->request->all())) {
+            $session->set('last_request', $request->request->all());
+        };
+
         $search = $form->handleRequest($request);
         $products = [];
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $search->get('category')->getData();
@@ -75,12 +89,35 @@ class HomeController extends AbstractController
                 'price' => $price
             ];
 
-            $products = $productRepository->searchProduct($searchParameters);
+            $articles = $productRepository->searchProduct($searchParameters);
+        } else {
+            $searchParamPage = $session->get('last_request')['search_product'];
+
+            $searchParametersPage = [
+                'category' => $searchParamPage['category'],
+                'minWidth' => $searchParamPage['minWidth'],
+                'minDepth' => $searchParamPage['minDepth'],
+                'minHeight' => $searchParamPage['minHeight'],
+                'maxWidth' => $searchParamPage['maxWidth'],
+                'maxDepth' => $searchParamPage['maxDepth'],
+                'maxHeight' => $searchParamPage['maxHeight'],
+                'price' => $searchParamPage['price']
+            ];
+
+            $articles = $productRepository->searchProduct($searchParametersPage);
         }
+
+        $products = $paginator->paginate(
+            $articles, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            20 // Nombre de résultats par page
+        );
 
         return $this->render('home/search.html.twig', [
             'form' => $form->createView(),
             'products' => $products,
+            'request' => $request,
+
         ]);
     }
 }

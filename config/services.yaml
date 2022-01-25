@@ -4,29 +4,42 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    RAINFOREST_KEY: '%env(RAINFOREST_KEY)%'
+  RAINFOREST_KEY: "%env(RAINFOREST_KEY)%"
 services:
-    # default configuration for services in *this* file
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/*'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
-            - '../src/Tests/'
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: "../src/*"
+    exclude:
+      - "../src/DependencyInjection/"
+      - "../src/Entity/"
+      - "../src/Kernel.php"
+      - "../src/Tests/"
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller/'
-        tags: ['controller.service_arguments']
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  App\Controller\:
+    resource: "../src/Controller/"
+    tags: ["controller.service_arguments"]
+knp_paginator:
+  page_range: 5 # number of links shown in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links to page 4, 5, 6)
+  default_options:
+    page_name: page # page query parameter name
+    sort_field_name: sort # sort field query parameter name
+    sort_direction_name: direction # sort direction query parameter name
+    distinct: true # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    filter_field_name: filterField # filter field query parameter name
+    filter_value_name: filterValue # filter value query parameter name
+  template:
+    pagination: "@KnpPaginator/Pagination/sliding.html.twig" # sliding pagination controls template
+    sortable: "@KnpPaginator/Pagination/sortable_link.html.twig" # sort link template
+    filtration: "@KnpPaginator/Pagination/filtration.html.twig" # filters template
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-    
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones
