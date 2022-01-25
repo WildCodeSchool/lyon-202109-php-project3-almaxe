@@ -65,6 +65,7 @@ class HomeController extends AbstractController
         };
 
         $search = $form->handleRequest($request);
+        $articles = [];
         $products = [];
 
 
