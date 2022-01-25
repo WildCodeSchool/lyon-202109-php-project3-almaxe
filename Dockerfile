@@ -25,6 +25,7 @@ FROM node:14-alpine as frontend
 
 COPY package.json tailwind.config.js postcss.config.js webpack.config.js yarn.lock /app/
 COPY ./assets/ /app/assets/
+COPY ./templates/ /app/templates/
 
 
 WORKDIR /app
