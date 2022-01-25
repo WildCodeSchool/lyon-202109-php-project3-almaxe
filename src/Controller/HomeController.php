@@ -91,20 +91,25 @@ class HomeController extends AbstractController
 
             $articles = $productRepository->searchProduct($searchParameters);
         } else {
-            $searchParamPage = $session->get('last_request')['search_product'];
+            if (is_array($session->get('last_request'))) {
+                $searchParamPage = $session->get('last_request')['search_product'];
 
-            $searchParametersPage = [
-                'category' => $searchParamPage['category'],
-                'minWidth' => intval($searchParamPage['minWidth']),
-                'minDepth' => intval($searchParamPage['minDepth']),
-                'minHeight' => intval($searchParamPage['minHeight']),
-                'maxWidth' => intval($searchParamPage['maxWidth']),
-                'maxDepth' => intval($searchParamPage['maxDepth']),
-                'maxHeight' => intval($searchParamPage['maxHeight']),
-                'price' => intval($searchParamPage['price'])
-            ];
+                if (is_array($searchParamPage)) {
+                    $searchParametersPage = [
+                        'category' => $searchParamPage['category'],
+                        'minWidth' => intval($searchParamPage['minWidth']),
+                        'minDepth' => intval($searchParamPage['minDepth']),
+                        'minHeight' => intval($searchParamPage['minHeight']),
+                        'maxWidth' => intval($searchParamPage['maxWidth']),
+                        'maxDepth' => intval($searchParamPage['maxDepth']),
+                        'maxHeight' => intval($searchParamPage['maxHeight']),
+                        'price' => intval($searchParamPage['price'])
+                    ];
 
-            $articles = $productRepository->searchProduct($searchParametersPage);
+
+                    $articles = $productRepository->searchProduct($searchParametersPage);
+                }
+            }
         }
 
         $products = $paginator->paginate(
