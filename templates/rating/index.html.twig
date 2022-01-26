@@ -20,7 +20,13 @@
 			{{ form_end(form) }}
 
 		</div>
+
+		{% if status is defined %}
+			<p>{{ status }}</p>
+		{% endif %}
 	</div>
+
+	<a href="{{ path('admin_dashboard') }}" class="px-4 block mt-6 text-blue-600 hover:text-blue:500 hover:underline">Retour à la console d'administration</a>
 
 
 {% endblock %}
