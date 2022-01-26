@@ -5,11 +5,66 @@
 {% endblock %}
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="preconnect" href="https://fonts.googleapis.com"/>
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 {% endblock %}
 {% block body %}
-	<h1 class="text-center text-2xl sm:text-4xl mb-6">Recherche de meubles<br>par dimensions</h1>
-	{% include "home/_searchForm.html.twig" %}
-{% endblock
-%}
+	<div class="min-h-screen flex flex-col justify-start content-start h-fit mt-10 rounded-xl bg-no-repeat bg-fixed " style="background-image: url('https://cdn.pixabay.com/photo/2014/08/11/21/39/wall-416060_1280.jpg')">
+		<div class="relative py-3 sm:max-w-xl sm:mx-auto w-full ">
+			<div class="relative px-4 bg-white shadow-lg rounded-3xl p-5 bg-clip-padding bg-opacity-20 border border-gray-200 scroll-smooth"  style="backdrop-filter: blur(20px);">
+				<div class="max-w-md mx-auto  w-10/12">
+					{% include "home/_searchForm.html.twig" %}
+				</div>
+			</div>
+		</div>
+		<div class="relative py-3 sm:max-w-xl sm:mx-auto w-full mt-16 popup" id="popup">
+			<div class="relative px-4 w-8/12 py-10 bg-gray-500 shadow-lg rounded-3xl p-20 bg-clip-padding bg-opacity-30 border border-gray-200 mx-auto" style="backdrop-filter: blur(20px);">
+				<div class="max-w-md mx-auto  w-10/12">
+					<h1>Trouvez le meuble parfait.</h1>
+					<div class="divide-y divide-gray-500">
+						<div class="py-8 leading-6 space-y-4 text-gray-600 sm:text-lg sm:leading-7 text-3xl">
+							<ul class="list-disc space-y-2">
+								<li class="flex items-start">
+									<p class="ml-2">On cherche pour vous.</p>
+								</li>
+								<li class="flex items-start">
+									<p class="ml-2">Gratuitement.</p>
+								</li>
+							</ul>
+						</div>
+						<div class="pt-6 text-base leading-6 font-bold sm:text-lg sm:leading-7">
+							<a href="{{ path('product_search') }}">
+								<p class="flex items-start ml-2">
+									C'est parti !
+								</p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+	const popup = document.getElementById('popup');
+
+		window.addEventListener("scroll", function(){
+
+			const scrollValue = (window.innerHeight + this.window.scrollY) / document.body.offsetHeight;
+
+			console.log(scrollValue);
+
+			//Apparition tuile
+			if(scrollValue > 0.72){
+				popup.style.opacity = '1';
+			}
+			if(scrollValue < 0.72){
+				popup.style.opacity = '0';
+			}
+		})
+	</script>
+	{% endblock %}
+
+
+
+
+

@@ -6,6 +6,8 @@ module.exports = {
         './assets/**/*.scss',
         './assets/**/*.js',
     ],
+    darkMode: 'media',
+    justifyContent: ['hover', 'focus'],
     theme: {
         extend: {
             fontFamily: {

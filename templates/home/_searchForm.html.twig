@@ -1,130 +1,129 @@
-{{ form_start(form) }}
-<div class="items-center flex flex-col flex-wrap">
-	<div class="flex flex-col lg:flex-row items-center justify-center w-full my-5">
-		{{ form_label(form.category, "Je recherche", {
+{{ form_start(form) }}    
+	<div class="items-center flex flex-col flex-wrap">
+		<div class="flex flex-col lg:flex-row items-center w-full my-5 justify-center">
+			{{ form_label(form.category, "Je recherche", {
                 label_attr: {
-                    class: "block sm:text-lg text-gray-800"
+                    class: "block sm:text-xl text-gray-900 text-shadow tracking-wider mt-2"
                 }
     		}) }}
-		<div class="mt-1 relative rounded-md shadow-sm w-3/6 sm:w-2/6 max-w-xs">
-			{{ form_widget(form.category, {
+			<div class="mt-1 relative rounded-sm sm:w-2/6 max-w-xs">
+				{{ form_widget(form.category, {
                     attr: {
-                        class: "p-2 focus:border-orange w-20 border-gray-500 bg-white rounded-md border-2 w-full lg:ml-4",
+                        class: "p-2 focus:border-orange border-gray-500 bg-white rounded-md border-2 w-full lg:ml-4",
                         placeholder: "Rechercher",
                     }
                 }) }}
+			</div>
 		</div>
-	</div>
 
-	<p class="block sm:text-lg text-gray-800 mt-4">Avec les dimensions (cm):</p>
-	<div class="justify-center flex flex-col lg:flex-row flex-wrap mx-1 mb-4">
-		<div class="flex relative items-end mx-6">
-			{{ form_label(form.minHeight, "Hauteur", {
+		<p class="block sm:text-lg text-gray-900 text-shadow tracking-wider mt-4">Avec les dimensions (cm):</p>
+		<div class="justify-center flex flex-col lg:flex-row flex-wrap mx-1 mb-4">
+			<div class="flex relative items-end mx-6">
+				{{ form_label(form.minHeight, "Hauteur", {
                 label_attr: {
-                    class: "block text-sm sm:text-base text-gray-800 w-20 lg:w-full"
+                    class: "block text-sm sm:text-base text-gray-900 text-shadow tracking-wider w-20 lg:w-full"
                 }
             }) }}
-			<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-				<p class="text-sm text-gray-700">min</p>
-				{{ form_widget(form.minHeight, {
+				<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
+					<p class="text-sm text-gray-900 text-shadow tracking-wider">min</p>
+					{{ form_widget(form.minHeight, {
                     attr: {
                         class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
                         placeholder: "0",
                         min: 0
                     }
                 }) }}
-			</div>
-			<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-				<p class="text-sm text-gray-700">max</p>
-				{{ form_widget(form.maxHeight, {
+				</div>
+				<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
+					<p class="text-sm text-gray-900 text-shadow tracking-wider">max</p>
+					{{ form_widget(form.maxHeight, {
                     attr: {
                         class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
                         placeholder: "0",
                         min: 0
                     }
                 }) }}
+				</div>
 			</div>
-		</div>
 
-		<div class="flex relative items-end mx-6">
-			{{ form_label(form.minWidth, "Largeur", {
+			<div class="flex relative items-end mx-6">
+				{{ form_label(form.minWidth, "Largeur", {
                 label_attr: {
-                    class: "block text-sm sm:text-base text-gray-800 w-20 lg:w-full"
+                    class: "block text-sm sm:text-base text-gray-900 text-shadow tracking-wider w-20 lg:w-full"
                 }
             }) }}
-			<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-				<p class="text-sm text-gray-700">min</p>
-				{{ form_widget(form.minWidth, {
+				<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
+					<p class="text-sm text-gray-900 text-shadow tracking-wider">min</p>
+					{{ form_widget(form.minWidth, {
                     attr: {
                         class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
                         placeholder: "0",
                         min: 0
                     }
                 }) }}
-			</div>
-			<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-				<p class="text-sm text-gray-700">max</p>
-				{{ form_widget(form.maxWidth, {
+				</div>
+				<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
+					<p class="text-sm text-gray-900 text-shadow tracking-wider">max</p>
+					{{ form_widget(form.maxWidth, {
                     attr: {
                         class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
                         placeholder: "0",
                         min: 0
                     }
                 }) }}
+				</div>
 			</div>
-		</div>
 
-		<div class="flex relative items-end mx-6">
-			{{ form_label(form.minDepth, "Profondeur", {
+			<div class="flex relative items-end mx-6">
+				{{ form_label(form.minDepth, "Profondeur", {
                 label_attr: {
-                    class: "block text-sm sm:text-base text-gray-800 w-20 lg:w-full"
+                    class: "block text-sm sm:text-base text-gray-900 text-shadow tracking-wider w-20 lg:w-full"
                 }
             }) }}
-			<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-				<p class="text-sm text-gray-700">min</p>
-				{{ form_widget(form.minDepth, {
+				<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
+					<p class="text-sm text-gray-900 text-shadow tracking-wider">min</p>
+					{{ form_widget(form.minDepth, {
                     attr: {
                         class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
                         placeholder: "0",
                         min: 0
                     }
                 }) }}
-			</div>
-			<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-				<p class="text-sm text-gray-700">max</p>
-				{{ form_widget(form.maxDepth, {
+				</div>
+				<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
+					<p class="text-sm text-gray-900 text-shadow tracking-wider">max</p>
+					{{ form_widget(form.maxDepth, {
                     attr: {
                         class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
                         placeholder: "0",
                         min: 0
                     }
                 }) }}
+				</div>
 			</div>
-		</div>
 
-	</div>
-	<div class="flex items-center mt-8 mb-5">
-		{{ form_label(form.price, "Prix maximum (€)", {
+		</div>
+		<div class="flex items-center mt-8 mb-5">
+			{{ form_label(form.price, "Prix maximum (€)", {
                 label_attr: {
-                    class: "block text-sm sm:text-base text-gray-800"
+                    class: "block text-sm sm:text-base text-gray-900 text-shadow tracking-wider"
                 }
     		}) }}
-		<div class="mt-1 relative rounded-md shadow-sm ml-2">
-			{{ form_widget(form.price, {
+			<div class="mt-1 relative rounded-md shadow-sm ml-2">
+				{{ form_widget(form.price, {
                     attr: {
                         class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
                         placeholder: "0",
                         min: 0
                     }
                 }) }}
+			</div>
+		</div>
+
+		<div class="flex items-center">
+			<button id="btn" class="mx-auto my-2 py-2 px-4 border border-transparent rounded-md text-gray-900 bg-orange hover:bg-orange-light focus:outline-none">
+				{{ button_label|default('Rechercher') }}
+			</button>
 		</div>
 	</div>
-
-	<div class="flex items-center">
-		<button id="btn" class="mx-auto my-2 py-2 px-4 border border-transparent rounded-md text-white bg-orange hover:bg-orange-light focus:outline-none">
-			{{ button_label|default('Rechercher') }}
-		</button>
-	</div>
-</div>
-
 {{ form_end(form) }}

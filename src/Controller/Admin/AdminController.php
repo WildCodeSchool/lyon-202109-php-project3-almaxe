@@ -37,7 +37,7 @@ class AdminController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('Pile Poil')
             ->setTitle('<img src="/images/logo.png" alt="Logo de pile poil" class="w-10 h-10">')
-            ->setFaviconPath('/images/favicon.png')
+            ->setFaviconPath('/images/favico.png')
             ;
     }
 
