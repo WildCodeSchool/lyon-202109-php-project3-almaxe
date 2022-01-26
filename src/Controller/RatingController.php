@@ -32,7 +32,7 @@ class RatingController extends AbstractController
 
                 return $this->render('rating/index.html.twig', [
                     'form' => $form->createView(),
-                    'status' => 'Ratings added',
+                    'status' => 'Avis ajoutés',
                 ]);
             }
         }

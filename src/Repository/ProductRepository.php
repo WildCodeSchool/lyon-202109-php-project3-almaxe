@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Service\HandleProductRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Select;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,7 +24,10 @@ class ProductRepository extends ServiceEntityRepository
     public function searchProduct(array $parameters): array
     {
 
-        $query = $this->createQueryBuilder('p');
+        $query = $this->createQueryBuilder('p')
+            ->addSelect('avg(r.rating) as meanRating')
+            ->join('p.reviews', 'r')
+            ->groupBy('p');
 
         $service = new HandleProductRepositoryInterface();
 

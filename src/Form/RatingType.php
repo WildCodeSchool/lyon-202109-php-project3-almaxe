@@ -12,7 +12,7 @@ class RatingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('confirm', CheckboxType::class, [
-            'label'    => 'Add random ratings to products which do not have ratings yet ?',
+            'label'    => "Ajouter des avis aléatoires aux produits n'en ayant pas ?",
             'required' => true,
         ]);
     }
