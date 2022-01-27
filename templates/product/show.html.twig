@@ -14,13 +14,12 @@
 
 	<div class="max-w-screen-xl mx-auto my-8 py-8 px-10 sm:px-12 sm:relative sm:bottom-4 bg-white lg:mx-auto lg:px-24 lg:rounded-lg">
 		<div class="product_container mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
-			<div class="w-11/12 h-12/12 mx-auto overflow-hidden rounded-md overflow-hidden">
-				<img src="{{ product.picture }}" alt="{{ product.name }}" class="object-cover">
+			<div class="w-11/12 h-12/12 mx-auto overflow-hidden rounded-md card-zoom">
+				<img src="{{ product.picture }}" alt="{{ product.name }}" class="object-cover card-zoom-image">
 			</div>
 			<div class="lg:mx-5">
 				<h1 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl mt-6 lg:mt-0">{{ product.name }}</h1>
-				<h2 class="text-sm font-medium text-gray-900 mt-4">Caractéristiques:</h2>
-
+				<h2 class="text-sm font-medium text-gray-900 mt-4">Caractéristiques :</h2>
 				<ul role="list" class="mt-2 ml-2 pl-2 list-disc text-sm space-y-1">
 					<li class="text-gray-400">
 						<span class="text-gray-600">Longueur :
@@ -49,14 +48,13 @@
 			<div class="lg:mx-5">
 				<div class="mb-8 mt-8 lg:mt-0">
 					<p>Voir chez le partenaire:</p>
-					<a href="{{ product.url }}" target="_blank" class="bg-orange border border-transparent rounded-md py-2 px-6 flex items-center justify-center text-base font-medium text-white hover:bg-black-light mt-3">
+					<a href="{{ product.url }}" target="_blank" class="bg-primary border border-transparent rounded-md py-2 px-6 flex items-center justify-center text-base font-medium text-white hover:bg-black-light mt-3">
 						<img src="{{ product.partner.picture }}" alt="" class="object-cover h-12">
 					</a>
 				</div>
-				<button onclick="window.history.go(-1); return false;" class="bg-orange border border-transparent rounded-md py-2 px-6 flex items-center justify-center text-base font-medium text-white hover:bg-black-light w-full">Revenir à la liste des produits</button>
+				<button onclick="window.history.go(-1); return false;" class="bg-primary border border-transparent rounded-md py-2 px-6 flex items-center justify-center text-base font-medium text-white hover:bg-black-light w-full">Revenir à la liste des produits</button>
 				{% if is_granted("ROLE_ADMIN") %}
 					<a href="{{ path('product_edit', {'id': product.id}) }}" class="mt-10 bg-blue-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-black-light w-full">Modifier le produit</a>
-
 					{{ include('product/_delete_form.html.twig') }}
 				{% endif %}
 			</div>

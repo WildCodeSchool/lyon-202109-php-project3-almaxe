@@ -11,7 +11,7 @@ class HandleProductRating
 {
     private EntityManagerInterface $entityManager;
     private const NB_REVIEWS_MIN = 1;
-    private const NB_REVIEWS_MAX = 15;
+    private const NB_REVIEWS_MAX = 5;
 
     public function __construct(
         EntityManagerInterface $entityManager
