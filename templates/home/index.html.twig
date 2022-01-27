@@ -7,20 +7,20 @@
 	{{ parent() }}
 {% endblock %}
 {% block body %}
-	<div class="min-h-screen flex flex-col justify-start content-start h-fit mt-10 rounded-xl bg-no-repeat bg-fixed bg-cover w-full bg-[url('/assets/images/index.jpg')]" >
+	<div class="flex flex-col justify-start content-start mt-10 rounded-xl bg-no-repeat bg-fixed bg-cover w-full bg-[url('/assets/images/index.jpg')]" >
 		<div class="relative py-3 sm:max-w-xl sm:mx-auto w-full ">
-			<div class="relative px-4 bg-slate-50 shadow-lg rounded-md p-5 bg-clip-padding bg-opacity-10  border border-gray-200 scroll-smooth"  style="backdrop-filter: blur(20px);">
+			<div class="relative px-4 bg-stone-200 shadow-lg rounded-md p-5 bg-clip-padding bg-opacity-10  border border-gray-200 scroll-smooth"  style="backdrop-filter: blur(20px);">
 				<div class="max-w-md mx-auto  w-10/12">
 					{% include "home/_searchForm.html.twig" %}
 				</div>
 			</div>
 		</div>
 		<div class="relative py-3 sm:max-w-xl sm:mx-auto w-full mt-24 popup" id="popup">
-			<div class="relative px-4 w-8/12 py-10 bg-slate-50 shadow-lg rounded-xl p-20 bg-clip-padding bg-opacity-10 border border-gray-200 mx-auto" style="backdrop-filter: blur(20px);">
+			<div class="relative px-4 w-8/12 py-10 bg-stone-200 shadow-lg rounded-xl p-20 bg-clip-padding bg-opacity-10 border border-gray-200 mx-auto" style="backdrop-filter: blur(20px);">
 				<div class="max-w-md mx-auto w-10/12 text-4xl">
 					<h1>Trouvez le meuble parfait.</h1>
 					<div class="divide-y divide-black">
-						<div class="py-8 leading-6 space-y-4 text-white sm:text-lg sm:leading-7 text-3xl">
+						<div class="py-8 leading-6 space-y-4 text-white sm:text-lg sm:leading-7 text-3xl tracking-wider font-light">
 							<ul class="list-disc space-y-2">
 								<li class="flex items-start">
 									<p class="ml-2">On cherche pour vous.</p>

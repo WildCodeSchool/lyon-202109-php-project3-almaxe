@@ -31,7 +31,7 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body class="bg-gray-200">
+	<body class="bg-gray-200 selection:bg-primary-dark">
 		<header class="sticky top-0 z-50 bg-gray-200" id="header">
 			<div class="my-2 flex flex-col sm:flex-row items-center justify-center borderI">
 				<a href="{{ path('home') }}" class="shrink-0 ">
@@ -45,9 +45,9 @@
 
 		{% endblock %}
 	</body>
-	<footer class="w-full py-6 px-4 mt-20 bg-primary-light bg-gradient-to-t from-primary-dark to-primary-light w-max-xl mx-auto">
+	<footer class="w-full py-6 px-4 mt-20 bg-primary-light bg-gradient-to-t from-primary-dark to-primary-light w-max-xl mx-auto  bottom-0 z-0">
 		<div class="flex items-center justify-between my-4">
-			<p class="inline-flex text-slate-300 px-2 pt-6 w-fit">
+			<p class="inline-flex text-slate-300 px-2 pt-6 w-fit tracking-wider ">
 				Pile Poil
 				<br>
 				222 Rue de la République

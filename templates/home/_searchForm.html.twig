@@ -1,5 +1,5 @@
 {{ form_start(form) }}
-<div class="items-center flex flex-col flex-wrap font-light text-xl">
+<div class="items-center flex flex-col flex-wrap font-light text-xl ">
 	<div class="flex flex-col lg:flex-row items-center w-full my-5 justify-center">
 		{{ form_label(form.category, "Je cherche :", {
                 label_attr: {
@@ -31,7 +31,7 @@
             <p class="text-sm text-gray-900 text-shadow tracking-wider">min</p>
             {{ form_widget(form.minHeight, {
             attr: {
-                class: "px-2 focus:border-primary w-20 bg-white text-sm rounded-md border-2 text-center tracking-widest",
+                class: "px-2 focus:border-primary w-20  bg-white text-sm rounded-md border-2 text-center tracking-widest",
                 placeholder: "0",
                 min: 0
             }
