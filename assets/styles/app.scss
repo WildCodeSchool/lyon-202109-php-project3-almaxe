@@ -30,7 +30,7 @@
     @apply absolute text-sm w-32 text-center font-black transition-all duration-500 ease-in-out transform scale-150 text-black opacity-60 hidden;
 }
 .card-zoom:hover .card-zoom-image {
-    @apply scale-150;
+    @apply scale-150 opacity-90;
 }
 .card-zoom:hover .card-zoom-text {
     @apply scale-100;

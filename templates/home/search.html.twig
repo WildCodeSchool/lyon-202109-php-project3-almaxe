@@ -30,19 +30,19 @@
 							</div>
 						</a>
 						<div class="mt-2 p-2">
-							<div class="flex text-sm font-bold justify-center">
-								<p class="mr-3">H:
+							<div class="flex text-sm font-bold mx-auto w-full justify-around">
+								<p class="">H :
 									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product[0].height }}</span>
 								</p>
-								<p class="mr-3">L:
+								<p class="">L :
 									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product[0].width }}</span>
 								</p>
-								<p>P:
+								<p class="">P :
 									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product[0].depth }}</span>
 								</p>
 							</div>
 							<a href="{{ path('product_show', {'slug': product[0].slug}) }}">
-								<h3 class="mt-4 text-gray-800 text-xl font-bold mx-auto text-center">
+								<h3 class="mt-4 text-gray-800 text-xl font-semibold mx-auto text-left h-16 ml-3 flex items-center">
 									{{ product[0].name|length > 50 ? product[0].name|slice(0, 50) ~ '...' : product[0].name }}
 								</h3>
 							</a>
@@ -50,9 +50,9 @@
 					</div>
 					<div class="w-full flex justify-between mt-4 p-2">
 						<a href="{{ product[0].url }}" target="_blank" class="block w-20">
-							<img src="{{ product[0].partner.picture }}" alt="Logo du partenaire {{ product[0].partner.name }}" class="object-cover">
+							<img src="{{ product[0].partner.picture }}" alt="Logo du partenaire {{ product[0].partner.name }}" class="object-cover rounded-md">
 						</a>
-						<p class="mt-1 text-lg font-medium text-gray-900" id="price">
+						<p class="mt-1 text-lg font-medium text-gray-900 flex items-center my-auto text-center" id="price">
 							{{ product[0].price|number_format(2) }}
 							&#8364;
 						</p>
