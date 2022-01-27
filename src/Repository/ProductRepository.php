@@ -52,9 +52,48 @@ class ProductRepository extends ServiceEntityRepository
             $query->andWhere('p.price <= :price')
                 ->setParameter('price', $price);
         }
+        $query->setFirstResult(($parameters['page'] - 1) * 20);
+        $query->setMaxResults(20);
 
         $service->addOrder($query, $parameters);
 
         return (array) $query->getQuery()->getResult();
+    }
+
+    public function countSearchProduct(array $parameters): int
+    {
+
+        $query = $this->createQueryBuilder('p');
+        $query->select('count(p.id)');
+
+        $service = new HandleProductRepositoryInterface();
+
+
+
+        if ($parameters['category']) {
+            $category = $parameters['category'];
+            $query->andWhere('p.category = :category')
+                ->setParameter('category', $category);
+        }
+
+        if ($parameters['minDepth'] || $parameters['maxDepth']) {
+            $service->setSubQuery($query, 'p.depth', $parameters['minDepth'], $parameters['maxDepth']);
+        }
+
+        if ($parameters['minHeight'] || $parameters['maxHeight']) {
+            $service->setSubQuery($query, 'p.height', $parameters['minHeight'], $parameters['maxHeight']);
+        }
+
+        if ($parameters['minWidth'] || $parameters['maxWidth']) {
+            $service->setSubQuery($query, 'p.width', $parameters['minWidth'], $parameters['maxWidth']);
+        }
+
+        if ($parameters['price']) {
+            $price = $parameters['price'];
+            $query->andWhere('p.price <= :price')
+                ->setParameter('price', $price);
+        }
+
+        return intval($query->getQuery()->getSingleScalarResult());
     }
 }

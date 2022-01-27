@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'variables.scss';
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -13,4 +13,13 @@
 
 .product_container {
     align-self: stretch;
+}
+
+.active {
+    background-color: $primary-color;
+    color: white;
+}
+
+.paginationBtn {
+    width: 40px;
 }

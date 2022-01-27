@@ -72,7 +72,8 @@ class HomeController extends AbstractController
                 'maxWidth' => $maxWidth,
                 'maxDepth' => $maxDepth,
                 'maxHeight' => $maxHeight,
-                'price' => $price
+                'price' => $price,
+                'page' => 1
             ];
 
             $products = $productRepository->searchProduct($searchParameters);
@@ -82,5 +83,44 @@ class HomeController extends AbstractController
             'form' => $form->createView(),
             'products' => $products,
         ]);
+    }
+
+    /**
+     * @Route("/ajax/{page}/{category}/{minHeight}/{maxHeight}/{minWidth}/{maxWidth}/{minDepth}/{maxDepth}/{price}"),
+     * name="ajax_request", method="POST"
+     */
+    public function ajaxProduct(
+        Request $request,
+        int $page,
+        int $category,
+        int $minHeight,
+        int $maxHeight,
+        int $minWidth,
+        int $maxWidth,
+        int $minDepth,
+        int $maxDepth,
+        int $price,
+        ProductRepository $productRepository
+    ): Response {
+        $searchParameters = [
+            'category' => $category,
+            'minWidth' => $minWidth,
+            'minDepth' => $minDepth,
+            'minHeight' => $minHeight,
+            'maxWidth' => $maxWidth,
+            'maxDepth' => $maxDepth,
+            'maxHeight' => $maxHeight,
+            'price' => $price,
+            'page' => $page
+        ];
+
+        $products = $productRepository->searchProduct($searchParameters);
+        $productCount = $productRepository->countSearchProduct($searchParameters);
+
+        return new Response($this->render('home/_productsDisplay.html.twig', [
+            'productCount' => $productCount,
+            'products' => $products,
+            'page' => $page,
+        ]));
     }
 }
