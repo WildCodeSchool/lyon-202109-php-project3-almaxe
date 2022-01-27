@@ -17,6 +17,7 @@ module.exports = {
                 transparent: 'transparent',
                 current: 'currentColor',
                 white: '#ffffff',
+                complementary: '#0875c6',
                 tahiti: {
                     100: '#cffafe',
                     200: '#a5f3fc',
@@ -28,16 +29,20 @@ module.exports = {
                     800: '#155e75',
                     900: '#164e63',
                 },
-                orange: {
+                primary: {
                     light: '#ee8035',
                     DEFAULT: '#c55a11',
                     dark: '#7f3a0b',
                 },
                 black: {
                     light: '#7a7a7a',
-                    DEFAULT: '#00000',
+                    DEFAULT: '#0e1212',
                 },
                 red: '#F44336',
+            },
+            backgroundImage: {
+                'footer-texture': "url('/assets/images/footer.png')",
+                'index-cover': "url('/assets/images/index.jpg')",
             },
         },
     },

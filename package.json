@@ -40,6 +40,7 @@
     "build": "encore production --progress"
   },
   "dependencies": {
-    "@tailwindcss/aspect-ratio": "^0.4.0"
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "aos": "^2.3.4"
   }
 }
