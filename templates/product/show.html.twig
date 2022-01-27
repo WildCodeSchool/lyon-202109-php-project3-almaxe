@@ -60,7 +60,42 @@
 					{{ include('product/_delete_form.html.twig') }}
 				{% endif %}
 			</div>
+		</div>
 
+		<div class="mt-12">
+			{% if nbReviews > 0 %}
+				<h3 class="font-bold text-2xl mb-4">Avis &nbsp;<span class="text-sm font-normal">Note moyenne
+						<span class="font-bold text-base">{{ meanRating|number_format(1) }}</span>
+						/ 5
+						<span class="text-xs">({{ nbReviews }}
+							avis)</span>
+					</span>
+				</h3>
+
+				{% for review in product.reviews|slice(1, 3) %}
+					<div class="rounded-lg bg-gray-100 px-3 py-3 mb-4 max-w-md">
+						<div class="flex justify-between w-full mb-3">
+							<p class="italic text-gray-700">{{ review.reviewerForname ~ ' ' ~ review.reviewerLastname }}</p>
+							<div>
+
+								{% for i in 1..review.rating %}
+									<span class="star{{ i }}">⭐</span>
+								{% endfor %}
+								{% if review.rating < 5 %}
+									{% for i in review.rating + 1..5 %}
+										<span class="star{{ i }}">☆</span>
+									{% endfor %}
+								{% endif %}
+							</div>
+
+						</div>
+						<p>{{ review.comment }}</p>
+
+					</div>
+
+				{% endfor %}
+
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}
