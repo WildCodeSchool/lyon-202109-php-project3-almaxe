@@ -72,7 +72,6 @@ class ProductCrudController extends AbstractCrudController
             FormField::addPanel('Partenaire'),
             AssociationField::new('partner', 'Nom du partenaire :')
                 ->setDisabled(true),
-
         ];
     }
 }

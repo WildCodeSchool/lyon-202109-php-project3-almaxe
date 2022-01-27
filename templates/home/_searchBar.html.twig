@@ -1,51 +1,64 @@
 <div class="w-full mb-4">
 	{{ form_start(form) }}
-	<div class="w-full shrink max-w-screen-xl items-center flex flex-col flex-wrap sm:relative lg:items-start lg:mx-auto lg:pl-24">
-		<div class="flex flex-col lg:flex-row items-center justify-center w-full my-5 lg:justify-start sm:my-2 sm:mb-4">
+	<div class="shrink max-w-screen-xl items-center flex flex-col flex-wrap sm:relative lg:items-start mx-auto lg:pl-16 font-light w-fit">
+
+		<div class="flex flex-col lg:flex-row items-center justify-center content-center mx-auto w-fit my-5 sm:my-2 sm:mb-4">
 			{{ form_label(form.category, "Je recherche", {
                 label_attr: {
-                    class: "block sm:text-lg text-gray-800"
+                    class: "block sm:text-lg text-gray-800 tracking-wider "
                 }
     		}) }}
+
 			<div class="mt-1 relative rounded-md shadow-sm w-3/6 sm:w-2/6 max-w-xs">
 				{{ form_widget(form.category, {
                     attr: {
-                        class: "p-2 focus:border-orange w-20 border-gray-500 bg-white rounded-md border-2 w-full lg:ml-4",
+                        class: "p-2 focus:border-primary border-gray-500 bg-white rounded-md border-2 w-fit lg:ml-4",
                         placeholder: "Rechercher",
                     }
                 }) }}
 			</div>
 		</div>
+
 		<button id="toggleSearch" type="button" class="lg:hidden">Critères
 			<i id="toggleSearchIcon" class="not-italic">&dtrif;</i>
 		</button>
-		<div id="searchField" class="items-center flex flex-col flex-wrap hidden lg:block mt-4 lg:mt-0">
 
-			<p class="block sm:text-lg text-gray-800 lg:hidden">Avec les dimensions (cm):</p>
-			<div class="justify-center flex flex-col lg:flex-row flex-wrap mb-4">
-				<div class="flex relative items-end mx-6 lg:mr-6 lg:ml-0">
+		<div id="searchField" class="items-center flex-col flex-wrap hidden lg:block mt-4 lg:mt-0">
+
+			<p class="block sm:text-lg text-gray-800 lg:hidden">
+				Avec les dimensions (cm):
+			</p>
+
+			<div class="justify-center flex-col flex lg:flex-row mb-4 w-fit">
+				<div class="flex relative items-end mx-6 lg:mr-6 lg:ml-0 ">
 					{{ form_label(form.minHeight, "Hauteur", {
                 label_attr: {
-                    class: "block text-sm sm:text-base text-gray-800 w-20 lg:w-full"
-                }
-            }) }}
+                    class: "block text-sm sm:text-base text-gray-800 w-20 lg:w-full first-letter:text-3xl tracking-wider"
+                    }
+                }) }}
+
 					<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-						<p class="text-sm text-gray-700">min</p>
+						<p class="text-sm text-gray-700">
+							min
+						</p>
 						{{ form_widget(form.minHeight, {
-                    attr: {
-                        class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
-                        placeholder: "0",
-                        min: 0
+                attr: {
+                    class: "px-2 focus:border-primary w-20 border-gray-500 bg-white text-sm rounded-md border-2",
+                    placeholder: "0",
+                    min: 0
                     }
                 }) }}
 					</div>
+
 					<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-						<p class="text-sm text-gray-700">max</p>
+						<p class="text-sm text-gray-700">
+							max
+						</p>
 						{{ form_widget(form.maxHeight, {
-                    attr: {
-                        class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
-                        placeholder: "0",
-                        min: 0
+                attr: {
+                    class: "px-2 focus:border-primary w-20 border-gray-500 bg-white text-sm rounded-md border-2",
+                    placeholder: "0",
+                    min: 0
                     }
                 }) }}
 					</div>
@@ -53,27 +66,32 @@
 
 				<div class="flex relative items-end mx-6">
 					{{ form_label(form.minWidth, "Largeur", {
-                label_attr: {
-                    class: "block text-sm sm:text-base text-gray-800 w-20 lg:w-full"
+            label_attr: {
+                class: "block text-sm sm:text-base text-gray-800 w-20 lg:w-full first-letter:text-3xl tracking-wider"
                 }
             }) }}
 					<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-						<p class="text-sm text-gray-700">min</p>
+						<p class="text-sm text-gray-700">
+							min
+						</p>
 						{{ form_widget(form.minWidth, {
-                    attr: {
-                        class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
-                        placeholder: "0",
-                        min: 0
+                attr: {
+                    class: "px-2 focus:border-primary w-20 border-gray-500 bg-white text-sm rounded-md border-2",
+                    placeholder: "0",
+                    min: 0
                     }
                 }) }}
 					</div>
+
 					<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-						<p class="text-sm text-gray-700">max</p>
+						<p class="text-sm text-gray-700">
+							max
+						</p>
 						{{ form_widget(form.maxWidth, {
-                    attr: {
-                        class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
-                        placeholder: "0",
-                        min: 0
+                attr: {
+                    class: "px-2 focus:border-primary w-20 border-gray-500 bg-white text-sm rounded-md border-2",
+                    placeholder: "0",
+                    min: 0
                     }
                 }) }}
 					</div>
@@ -81,59 +99,61 @@
 
 				<div class="flex relative items-end mx-6">
 					{{ form_label(form.minDepth, "Profondeur", {
-                label_attr: {
-                    class: "block text-sm sm:text-base text-gray-800 w-20 lg:w-full"
+            label_attr: {
+                class: "block text-sm sm:text-base text-gray-800 w-20 lg:w-full first-letter:text-3xl tracking-wider"
                 }
             }) }}
 					<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-						<p class="text-sm text-gray-700">min</p>
+						<p class="text-sm text-gray-700">
+							min
+						</p>
 						{{ form_widget(form.minDepth, {
-                    attr: {
-                        class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
-                        placeholder: "0",
-                        min: 0
+                attr: {
+                    class: "px-2 focus:border-primary w-20 border-gray-500 bg-white text-sm rounded-md border-2",
+                    placeholder: "0",
+                    min: 0
                     }
                 }) }}
 					</div>
+
 					<div class="flex flex-col items-center mt-1 relative rounded-md shadow-sm ml-2">
-						<p class="text-sm text-gray-700">max</p>
+						<p class="text-sm text-gray-700">
+							max
+						</p>
 						{{ form_widget(form.maxDepth, {
-                    attr: {
-                        class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
-                        placeholder: "0",
-                        min: 0
+                attr: {
+                    class: "px-2 focus:border-primary w-20 border-gray-500 bg-white text-sm rounded-md border-2",
+                    placeholder: "0",
+                    min: 0
                     }
                 }) }}
 					</div>
 				</div>
-
 			</div>
 			<div class="flex flex-col items-center lg:flex-row">
-				<div class="flex items-center mt-8 lg:mt-0 mb-5 lg:mb-0">
+				<div class="flex items-center mt-8 lg:mt-0 mb-5 lg:mb-0 w-fit align-center mx-auto">
 					{{ form_label(form.price, "Prix maximum (€)", {
-                label_attr: {
-                    class: "block text-sm sm:text-base text-gray-800"
+            label_attr: {
+                class: "block text-sm sm:text-base text-gray-800"
                 }
-    		}) }}
+            }) }}
 					<div class="mt-1 lg:mt-0 relative rounded-md shadow-sm ml-2">
 						{{ form_widget(form.price, {
-                    attr: {
-                        class: "px-2 focus:border-orange w-20 border-gray-500 bg-white text-sm rounded-md border-2",
-                        placeholder: "0",
-                        min: 0
+                attr: {
+                    class: "px-2 focus:border-primary w-20 border-gray-500 bg-white text-sm rounded-md border-2",
+                    placeholder: "0",
+                    min: 0
                     }
                 }) }}
 					</div>
 				</div>
-
-				<button id="btn" class="mx-auto lg:mx-0 lg:ml-8 mt-2 lg:mt-0 mb-6 lg:mb-0 py-2 px-4 border border-transparent rounded-md text-white bg-orange hover:bg-orange-light focus:outline-none">
+			</div>
+			<div class="relative flex mx-auto w-fit mt-5">
+				<button id="btn" class="mx-auto lg:mx-0 lg:ml-8 mt-2 lg:mt-0 mb-6 lg:mb-0 py-2 px-4 border border-transparent rounded-md text-white bg-primary hover:bg-primary-light focus:outline-none">
 					{{ button_label|default('Rechercher') }}
 				</button>
 			</div>
-
-
 		</div>
 	</div>
-
 	{{ form_end(form) }}
 </div>

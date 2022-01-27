@@ -90,7 +90,6 @@ class HomeController extends AbstractController
      * name="ajax_request", method="POST"
      */
     public function ajaxProduct(
-        Request $request,
         int $page,
         int $category,
         int $minHeight,
@@ -115,10 +114,11 @@ class HomeController extends AbstractController
         ];
 
         $products = $productRepository->searchProduct($searchParameters);
-        $productCount = $productRepository->countSearchProduct($searchParameters);
+        $productsCount = $productRepository->countSearchProduct($searchParameters);
 
         return new Response($this->render('home/_productsDisplay.html.twig', [
-            'productCount' => $productCount,
+            'search' => $searchParameters,
+            'productsCount' => $productsCount,
             'products' => $products,
             'page' => $page,
         ]));

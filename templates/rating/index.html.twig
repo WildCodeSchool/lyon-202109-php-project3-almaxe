@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Avis
+{% endblock %}
+
+{% block body %}
+
+	<div class="flex flex-col items-center">
+		<h2 class="font-bold text-2xl mb-6">Ajouter automatiquement les avis aux produits</h2>
+
+		<div class="mx-auto">
+			{{ form_start(form) }}
+			{{ form_widget(form.confirm) }}
+			{{ form_label(form.confirm) }}
+
+
+			<input type="submit" value="Ajouter" class="mx-auto mt-3 block px-3 py-1 border bg-white cursor-pointer">
+			{{ form_end(form) }}
+
+		</div>
+
+		{% if status is defined %}
+			<p>{{ status }}</p>
+		{% endif %}
+	</div>
+
+	<a href="{{ path('admin_dashboard') }}" class="px-4 block mt-6 text-blue-600 hover:text-blue:500 hover:underline">Retour à la console d'administration</a>
+
+
+{% endblock %}
