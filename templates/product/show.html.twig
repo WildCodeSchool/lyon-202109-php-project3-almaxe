@@ -7,7 +7,9 @@
 {% endblock %}
 
 {% block header %}
+<div id="searchForm">
 	{% include "home/_searchBar.html.twig" %}
+</div>
 {% endblock %}
 
 {% block body %}
@@ -96,4 +98,17 @@
 			{% endif %}
 		</div>
 	</div>
+<script>
+const searchForm = document.getElementById('searchForm');
+	window.addEventListener("scroll", function(){
+		const scrollValue = (window.innerHeight + this.window.scrollY) / document.body.offsetHeight;
+		//Dispartion Formulaire
+		if(scrollValue > 0.63){
+					searchForm.classList.add('hidden');
+				}
+		//Apparition Formulaire
+		if( scrollValue < 0.62)
+			searchForm.classList.remove('hidden');
+			})
+</script>
 {% endblock %}
