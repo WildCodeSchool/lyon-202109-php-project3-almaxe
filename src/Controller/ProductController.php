@@ -77,8 +77,23 @@ class ProductController extends AbstractController
             );
         }
 
+        $nbReviews = 0;
+        $totalRating = 0;
+        $meanRating = "--";
+
+        foreach ($product->getReviews() as $review) {
+            $nbReviews++;
+            $totalRating += $review->getRating();
+        }
+
+        if ($nbReviews) {
+            $meanRating = $totalRating / $nbReviews;
+        }
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            'nbReviews' => $nbReviews,
+            'meanRating' => $meanRating,
             'form' => $form->createView()
         ]);
     }
