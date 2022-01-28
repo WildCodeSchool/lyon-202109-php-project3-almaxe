@@ -22,12 +22,21 @@
     align-self: stretch;
 }
 
+.active {
+    background-color: $primary-color;
+    color: white;
+}
+
+.paginationBtn {
+    width: 40px;
+}
+
 .card-zoom {
     @apply relative flex items-center justify-center m-3 overflow-hidden shadow-xl w-60 h-60 rounded-2xl;
 }
 
 .card-zoom-image {
-    @apply absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover;
+    @apply absolute w-fit h-full transition-all duration-500 ease-in-out transform bg-center bg-cover;
 }
 
 .card-zoom-text {
