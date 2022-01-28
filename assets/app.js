@@ -57,26 +57,6 @@ function calcNumberOfPage() {
     return numberOfPages;
 }
 
-function previousPage(currentPage) {
-    getProducts(currentPage - 1);
-}
-
-function nextPage(currentPage) {
-    getProducts(currentPage + 1);
-}
-
-function handlePagination(value, currentPage) {
-    if (value === '<') {
-        previousPage(currentPage);
-        return;
-    }
-    if (value === '>') {
-        nextPage(currentPage);
-        return;
-    }
-    getProducts(value);
-}
-
 function generatePagination() {
     const numberOfPages = calcNumberOfPage();
     const currentPage = parseInt(document.getElementById('page').value, 10);
@@ -177,6 +157,26 @@ function getProducts(page = 1) {
         // fetch
         fetchProduct(searchParams);
     }
+}
+
+function previousPage(currentPage) {
+    getProducts(currentPage - 1);
+}
+
+function nextPage(currentPage) {
+    getProducts(currentPage + 1);
+}
+
+function handlePagination(value, currentPage) {
+    if (value === '<') {
+        previousPage(currentPage);
+        return;
+    }
+    if (value === '>') {
+        nextPage(currentPage);
+        return;
+    }
+    getProducts(value);
 }
 
 // Wait for the page content to load
