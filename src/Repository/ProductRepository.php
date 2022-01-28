@@ -24,10 +24,11 @@ class ProductRepository extends ServiceEntityRepository
     public function searchProduct(array $parameters): array
     {
 
-        $query = $this->createQueryBuilder('p');
-            // ->addSelect('avg(r.rating) as meanRating')
-            // ->join('p.reviews', 'r')
-            // ->groupBy('p');
+        $query = $this->createQueryBuilder('p')
+            ->addSelect('avg(r.rating) as meanRating')
+            ->join('p.reviews', 'r')
+            ->groupBy('p')
+            ;
 
         $service = new HandleProductRepositoryInterface();
 

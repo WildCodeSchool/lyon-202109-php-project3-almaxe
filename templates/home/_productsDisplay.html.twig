@@ -2,56 +2,56 @@
 
 <div class="w-full flex" id="paginationTop"></div>
 
-<div class="max-w-screen-xl mx-auto my-8 py-8 px-10 sm:px-12 sm:relative sm:bottom-4 bg-white lg:mx-auto lg:px-24 lg:rounded-lg">
+<div class="min-w-screen mx-auto my-8 py-4 px-5 sm:px-12 sm:relative sm:bottom-4 bg-white lg:mx-auto lg:px-20 xl:px-10 lg:rounded-lg">
 	{% if products is defined and products is not empty %}
 		<div class="flex justify-between items-center mb-4 my-2">
 			<h2 class="text-3xl bold">Résultats :</h2>
 			<p id="numberOfProducts">{{ productsCount }}
-				{{ products[0].category.name }}s
+				{{ products[0][0].category.name }}
 			</p>
 		</div>
 
-		<div class="rounded-lg grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-8 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-6">
+		<div class="rounded-lg grid grid-cols-1 gap-y-5 gap-x-8 sm:grid-cols-2 lg:gap-x-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 2xl:grid-cols-5 min-w-full">
 			{% for product in products %}
-				<div data-aos="zoom-in" class="product_container w-full h-11/12 items-center mx-auto rounded-lg bg-gray-200 px-3 text-gray-700 py-4 max-w-xs flex flex-col justify-between">
-					<div>
-						<a href="{{ path('product_show', {'slug': product.slug}) }}">
-							<div class="w-11/12 mx-auto overflow-hidden rounded-md card-zoom">
-								<img src="{{ product.picture }}" alt="{{ product.slug }}" class="object-cover card-zoom-image items-center">
-								<h1 class="card-zoom-text">{{ product.name|length > 50 ? product.name|slice(0, 50) ~ '' : product.name }}</h1>
+				<div data-aos="zoom-in" class="product_container w-full h-11/12 items-center mx-auto rounded-lg bg-gray-200 text-gray-700 py-4 max-w-xs flex flex-col justify-between">
+					<div class="flex flex-col items-center">
+						<a href="{{ path('product_show', {'slug': product[0].slug}) }}">
+							<div class="w-11/12 mx-auto overflow-hidden rounded-md card-zoom 2xl:w-40 2xl:h-40 ">
+								<img src="{{ product[0].picture }}" alt="{{ product[0].slug }}" class="object-cover card-zoom-image items-center">
+								<h1 class="card-zoom-text">{{ product[0].name|length > 50 ? product[0].name|slice(0, 50) ~ '' : product[0].name }}</h1>
 							</div>
 						</a>
-						<div class="mt-2 p-2">
+						<div class="mt-2 p-2 w-full">
 							<div class="flex text-sm font-bold mx-auto w-full justify-around">
 								<p class="">H :
-									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product.height }}</span>
+									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product[0].height }}</span>
 								</p>
 								<p class="">L :
-									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product.width }}</span>
+									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product[0].width }}</span>
 								</p>
 								<p class="">P :
-									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product.depth }}</span>
+									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product[0].depth }}</span>
 								</p>
 							</div>
-							<a href="{{ path('product_show', {'slug': product.slug}) }}">
+							<a href="{{ path('product_show', {'slug': product[0].slug}) }}">
 								<h3 class="mt-4 text-gray-800 text-xl font-semibold mx-auto text-left h-16 ml-3 flex items-center">
-									{{ product.name|length > 50 ? product.name|slice(0, 50) ~ '...' : product.name }}
+									{{ product[0].name|length > 50 ? product[0].name|slice(0, 50) ~ '...' : product[0].name }}
 								</h3>
 							</a>
 						</div>
 					</div>
-					<div class="w-full flex justify-between mt-4 p-2">
-						<a href="{{ product.url }}" target="_blank" class="block w-20">
-							<img src="{{ product.partner.picture }}" alt="Logo du partenaire {{ product.partner.name }}" class="object-cover rounded-md">
+					<div class="w-full flex justify-between mt-4 p-2 px-5">
+						<a href="{{ product[0].url }}" target="_blank" class="block w-20">
+							<img src="{{ product[0].partner.picture }}" alt="Logo du partenaire {{ product[0].partner.name }}" class="object-cover rounded-md">
 						</a>
 						<p class=" text-lg font-medium text-gray-900 h-fit my-auto flex flex-col" id="price">
-							{{ product.price|number_format(2) }}
+							{{ product[0].price|number_format(2) }}
 							&#8364;
 						</p>
 					</div>
 					<div>
-						{% if product.meanRating is defined %}
 
+						{% if product.meanRating is defined %}
 							{% set rating = product.meanRating|number_format() %}
 							{% for i in 1..rating %}
 								<span class="star{{ i }}">⭐</span>

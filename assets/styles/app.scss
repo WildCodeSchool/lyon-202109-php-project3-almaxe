@@ -36,7 +36,7 @@
 }
 
 .card-zoom-image {
-    @apply absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover;
+    @apply absolute w-fit h-full transition-all duration-500 ease-in-out transform bg-center bg-cover;
 }
 
 .card-zoom-text {
