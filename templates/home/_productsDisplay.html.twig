@@ -50,8 +50,7 @@
 						</p>
 					</div>
 					<div>
-
-						{% if product.meanRating is defined %}
+						{% if product.meanRating is defined and product.meanRating is not null %}
 							{% set rating = product.meanRating|number_format() %}
 							{% for i in 1..rating %}
 								<span class="star{{ i }}">⭐</span>

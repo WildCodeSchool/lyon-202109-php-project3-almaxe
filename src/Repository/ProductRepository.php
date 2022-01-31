@@ -26,7 +26,7 @@ class ProductRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('p')
             ->addSelect('avg(r.rating) as meanRating')
-            ->leftjoin('p.reviews', 'r')
+            ->join('p.reviews', 'r')
             ->groupBy('p')
             ;
 
