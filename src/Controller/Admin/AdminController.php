@@ -37,26 +37,28 @@ class AdminController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('Pile Poil')
             ->setTitle('<img src="/images/logo.png" alt="Logo de pile poil" class="w-10 h-10">')
-            ->setFaviconPath('/images/favicon.png')
+            ->setFaviconPath('/images/favico.png')
             ;
     }
 
     public function configureMenuItems(): iterable
     {
         return [
-        MenuItem::section('Menu'),
-        MenuItem::linktoRoute('Retour vers Pile Poil', 'fas fa-home', 'home'),
-        MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out'),
-        MenuItem::section('Produits'),
-        MenuItem::linkToCrud('Les produits', "fa fa-file-text", Product::class),
-        MenuItem::section('Catégorie'),
-        MenuItem::linkToCrud('Les catégories', "fa fa-file-text", Category::class),
-        MenuItem::section('Partenaire'),
-        MenuItem::linkToCrud('Vos partenaire', "fas fa-comments", Partner::class),
-        MenuItem::linkToCrud('Ajouter un partenaire', 'fa fa-tags', Partner::class)
-            ->setAction('new'),
-        MenuItem::section('Utilisateurs'),
-        MenuItem::linkToCrud('Utilisateurs', "fa fa-file-text", User::class),
+            MenuItem::section('Menu'),
+            MenuItem::linktoRoute('Retour vers Pile Poil', 'fas fa-home', 'home'),
+            MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out'),
+            MenuItem::section('Produits'),
+            MenuItem::linkToCrud('Les produits', "fa fa-file-text", Product::class),
+            MenuItem::section('Catégorie'),
+            MenuItem::linkToCrud('Les catégories', "fa fa-file-text", Category::class),
+            MenuItem::section('Partenaire'),
+            MenuItem::linkToCrud('Vos partenaire', "fas fa-comments", Partner::class),
+            MenuItem::linkToCrud('Ajouter un partenaire', 'fa fa-tags', Partner::class)
+                ->setAction('new'),
+            MenuItem::section('Utilisateurs'),
+            MenuItem::linkToCrud('Utilisateurs', "fa fa-file-text", User::class),
+            MenuItem::section('Avis'),
+            MenuItem::linktoRoute('Génerer des avis aléatoires', 'fas fa-comment', 'rating'),
         ];
     }
 }
