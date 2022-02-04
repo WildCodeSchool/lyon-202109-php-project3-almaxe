@@ -138,7 +138,7 @@ function scrollToTop() {
 }
 
 async function fetchProduct(searchParams) {
-    await fetch(`http://localhost:8000/ajax${searchParams}`, {
+    await fetch(`/ajax${searchParams}`, {
         method: 'GET',
     })
         .then((response) => response.text())
