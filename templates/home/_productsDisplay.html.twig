@@ -6,7 +6,7 @@
 	{% if products is defined and products is not empty %}
 		<div class="flex justify-between items-center mb-4 my-2">
 			<h2 class="text-3xl bold">Résultats :</h2>
-			<p id="numberOfProducts">{{ productsCount }}
+			<p id="numberOfProducts" class="capitalize">{{ productsCount }}
 				{{ products[0][0].category.name }}
 			</p>
 		</div>
@@ -24,13 +24,13 @@
 						<div class="mt-2 p-2 w-full">
 							<div class="flex text-sm font-bold mx-auto w-full justify-around">
 								<p class="">H :
-									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product[0].height }}</span>
+									<span class="bg-gray-100 px-3 rounded-sm inline-block text-center">{{ product[0].height }}</span>
 								</p>
 								<p class="">L :
-									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product[0].width }}</span>
+									<span class="bg-gray-100 px-3 rounded-sm inline-block text-center">{{ product[0].width }}</span>
 								</p>
 								<p class="">P :
-									<span class="bg-gray-100 px-0.5 rounded-sm w-11 inline-block text-center">{{ product[0].depth }}</span>
+									<span class="bg-gray-100 px-3 rounded-sm inline-block text-center">{{ product[0].depth }}</span>
 								</p>
 							</div>
 							<a href="{{ path('product_show', {'slug': product[0].slug}) }}">
