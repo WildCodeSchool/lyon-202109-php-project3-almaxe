@@ -69,7 +69,7 @@ class MaisonDuMondeCrawlerManager
 
             for ($i = 1; $i <= $numberOfPage; $i++) {
                 try {
-                    echo ("Start scapping on page $i/$numberOfPage \n");
+                    echo ("Start scrapping on page $i/$numberOfPage \n");
                     $this->getProducts($category, $link . $i);
                 } catch (Exception $exception) {
                     continue;
