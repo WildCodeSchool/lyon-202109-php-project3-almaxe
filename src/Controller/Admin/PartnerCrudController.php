@@ -23,13 +23,12 @@ class PartnerCrudController extends AbstractCrudController
         return $crud
             ->setSearchFields(['name'])
             ->setDefaultSort(['name' => 'ASC']);
-        ;
     }
 
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
-        ->add('name');
+            ->add('name');
     }
 
     public function configureFields(string $pageName): iterable
@@ -45,7 +44,7 @@ class PartnerCrudController extends AbstractCrudController
             UrlField::new('picture', 'Url Du Logo :')
                 ->onlyOnForms(),
             BooleanField::new('active', 'Status :'),
-            TextField::new('affiliateKey', 'Clé affilier :'),
+            TextField::new('affiliateKey', 'Clef affilié :'),
         ];
     }
 }
