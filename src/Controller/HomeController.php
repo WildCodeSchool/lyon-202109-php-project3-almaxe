@@ -5,6 +5,7 @@ namespace App\Controller;
 use Exception;
 use App\Entity\Category;
 use App\Form\SearchProductType;
+use App\Service\HandleProductSearch;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,7 +54,8 @@ class HomeController extends AbstractController
      */
     public function searchFromProductPage(
         Request $request,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        HandleProductSearch $handleProductSearch
     ): Response {
         $form = $this->createForm(SearchProductType::class);
 
@@ -81,6 +83,13 @@ class HomeController extends AbstractController
                 'price' => $price,
                 'page' => 1
             ];
+
+            if (!$handleProductSearch->checkParameters($searchParameters)) {
+                $this->addFlash('error', 'La dimension min doit être inférieure à la dimension max');
+                return $this->render('home/search.html.twig', [
+                    'form' => $form->createView()
+                ]);
+            }
 
             $products = $productRepository->searchProduct($searchParameters);
         }
