@@ -60,7 +60,7 @@ class UserCrudController extends AbstractCrudController
         $context->getEntity()->setInstance($this->createEntity($context->getEntity()->getFqcn()));
         //@phpstan-ignore-next-line
         $this->container->get(EntityFactory::class)
-            ->processFields($context->getEntity(), FieldCollection::new($this->configureFields(Crud::PAGE_NEW)));/*@phpstan-ignore-line */
+            ->processFields($context->getEntity(), FieldCollection::new($this->configureFields(Crud::PAGE_NEW)));
         //@phpstan-ignore-next-line
         $this->container->get(EntityFactory::class)
             ->processActions($context->getEntity(), $context->getCrud()->getActionsConfig());/*@phpstan-ignore-line */
