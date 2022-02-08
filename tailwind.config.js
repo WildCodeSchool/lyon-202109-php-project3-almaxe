@@ -1,11 +1,7 @@
 const colors = require('tailwindcss/colors');
 /* eslint-disable global-require */
 module.exports = {
-    content: [
-        './templates/**/*.twig',
-        './assets/**/*.scss',
-        './assets/**/*.js',
-    ],
+    content: ['./templates/**/*.twig', './assets/**/*.js'],
     darkMode: 'media',
     justifyContent: ['hover', 'focus'],
     theme: {
@@ -38,7 +34,6 @@ module.exports = {
                     light: '#7a7a7a',
                     DEFAULT: '#0e1212',
                 },
-                red: '#F44336',
             },
             backgroundImage: {
                 'footer-texture': "url('/assets/images/footer.png')",

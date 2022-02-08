@@ -12,7 +12,7 @@
 			<div class="mt-1 relative rounded-md shadow-sm w-3/6 sm:w-2/6 max-w-xs">
 				{{ form_widget(form.category, {
                     attr: {
-                        class: "p-2 focus:border-primary border-gray-500 bg-white rounded-md border-2 w-fit lg:ml-4",
+                        class: "p-2 capitalize focus:border-primary border-gray-500 bg-white rounded-md border-2 w-fit lg:ml-4",
                         placeholder: "Rechercher",
                     }
                 }) }}
@@ -130,6 +130,13 @@
 					</div>
 				</div>
 			</div>
+			{% for messages in app.flashes %}
+				{% for message in messages %}
+					<span class="flash mt-0.5 mb-1 text-red-700 text-sm block inline-flex justify-center rounded-md border border-red-200 shadow-sm px-3 py-1.5 bg-red-100">
+						{{ message }}
+					</span>
+				{% endfor %}
+			{% endfor %}
 			<div class="flex flex-col items-center lg:flex-row">
 				<div class="flex items-center mt-8 lg:mt-0 mb-5 lg:mb-0 w-fit align-center mx-auto">
 					{{ form_label(form.price, "Prix maximum (€)", {

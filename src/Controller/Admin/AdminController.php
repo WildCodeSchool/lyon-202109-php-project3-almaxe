@@ -52,7 +52,7 @@ class AdminController extends AbstractDashboardController
             MenuItem::section('Catégorie'),
             MenuItem::linkToCrud('Les catégories', "fa fa-file-text", Category::class),
             MenuItem::section('Partenaire'),
-            MenuItem::linkToCrud('Vos partenaire', "fas fa-comments", Partner::class),
+            MenuItem::linkToCrud('Vos partenaires', "fas fa-comments", Partner::class),
             MenuItem::linkToCrud('Ajouter un partenaire', 'fa fa-tags', Partner::class)
                 ->setAction('new'),
             MenuItem::section('Utilisateurs'),
