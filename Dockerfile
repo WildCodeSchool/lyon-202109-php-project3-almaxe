@@ -66,6 +66,10 @@ COPY --from=frontend /app/public/build /var/www/public/build
 ##RUN mkdir /var/www/var
 ##RUN chown -R www-data:www-data /var/www/var
 
+RUN symfony console get:amazon
+RUN symfony console app:scrap-home
+RUN symfony console scrap:mdm
+
 EXPOSE 80
 
 COPY docker-entry.sh /etc/entrypoint.sh
