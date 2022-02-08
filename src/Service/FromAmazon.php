@@ -20,10 +20,10 @@ class FromAmazon
     private Slugify $slugify;
     private const KEYWORDS = [
         'Bureau',
-        //'Table',
-        // 'Etagère',
-        // 'Fauteuil',
-        // 'Canapé'
+        'Table',
+        'Etagère',
+        'Fauteuil',
+        'Canapé'
     ];
 
     public function __construct(
@@ -38,7 +38,7 @@ class FromAmazon
         $this->categoryRepository = $categoryRepository;
         $this->entityManager = $entityManager;
         $this->slugify = $slugify;
-        $this->nbOfProduct = 30;
+        $this->nbOfProduct = 15;
         $this->parameterBag = $parameterBag;
     }
 
