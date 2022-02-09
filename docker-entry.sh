@@ -16,6 +16,10 @@ php bin/console cache:warmup
 chmod -R 777 /var/www/var
 chmod -R 777 /var/www/public
 
+php bin/console get:amazon --quiet --no-interaction --no-debug
+php bin/console app:scrap-home --quiet --no-interaction --no-debug
+php bin/console scrap:mdm --quiet --no-interaction --no-debug
+
 ## server config
 php-fpm -D &
 nginx -g "daemon off;"
