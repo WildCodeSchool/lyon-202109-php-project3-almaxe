@@ -66,7 +66,7 @@ COPY --from=frontend /app/public/build /var/www/public/build
 ##RUN mkdir /var/www/var
 ##RUN chown -R www-data:www-data /var/www/var
 
-RUN php bin/console get:amazon
+##RUN php bin/console get:amazon
 RUN php bin/console app:scrap-home
 RUN php bin/console scrap:mdm
 
