@@ -16,6 +16,7 @@ class PartnerFixtures extends Fixture
         'Meubles.fr',
         'Leroy Merlin',
         'Home24',
+        'Amazon'
     ];
 
     public const AFFILIATE_KEY = [
@@ -26,10 +27,12 @@ class PartnerFixtures extends Fixture
         'Affiliate Key Meubles.fr',
         'Affiliate Key Leroy Merlin',
         'Affiliate Key Home24',
+        'Affiliate Key Amazon',
     ];
 
     public const ACTIVE = [
         false,
+        true,
         true,
         true,
         true,
@@ -46,7 +49,8 @@ class PartnerFixtures extends Fixture
         'https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/1f/e4/4f/1fe44fc4-4c31-' .
             '2331-26de-02e9866f43c0/source/256x256bb.jpg',
         'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Leroy_Merlin.svg/1200px-Leroy_Merlin.svg.png',
-        ''
+        'https://www.nebenwerte-magazin.com/wp-content/uploads/2021/01/home24.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/800px-Amazon_logo.svg.png'
     ];
 
     public function load(ObjectManager $manager)
